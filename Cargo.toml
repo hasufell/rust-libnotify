@@ -3,3 +3,9 @@
 name = "libnotify"
 version = "0.0.1"
 authors = ["Mika Attila <radiantstatue@gmail.com>"]
+
+[dependencies.libnotify-sys]
+git = "https://github.com/crumblingstatue/rust-libnotify-sys.git"
+
+[dependencies.glib-2_0-sys]
+git = "https://github.com/gi-rust/glib-sys.git"
