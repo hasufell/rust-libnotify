@@ -4,6 +4,7 @@ extern crate "libnotify-sys" as sys;
 extern crate "glib-2_0-sys" as glib;
 
 use std::ffi::CString;
+use std::marker::PhantomData;
 
 use glib::types::{
     TRUE,
@@ -61,7 +62,7 @@ impl Context {
                 return Err(NotificationCreationError::Unknown);
             }
 
-            Ok(Notification{handle: n})
+            Ok(Notification{handle: n, _phantom: PhantomData})
         }
     }
 }
@@ -74,12 +75,13 @@ impl Drop for Context {
     }
 }
 
-pub struct Notification {
-    handle: *mut sys::NotifyNotification
+pub struct Notification<'a> {
+    handle: *mut sys::NotifyNotification,
+    _phantom: PhantomData<&'a Context>
 }
 
-impl Notification {
-    pub fn show(&self) -> Result<(), ()> {
+impl<'a> Notification<'a> {
+    pub fn show(&'a self) -> Result<(), ()> {
         unsafe {
             let mut err: *mut glib::GError = std::ptr::null_mut();
             sys::notify_notification_show(self.handle, &mut err);
