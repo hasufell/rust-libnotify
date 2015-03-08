@@ -8,4 +8,5 @@ authors = ["Mika Attila <radiantstatue@gmail.com>"]
 git = "https://github.com/crumblingstatue/rust-libnotify-sys.git"
 
 [dependencies.glib-2_0-sys]
-git = "https://github.com/gi-rust/glib-sys.git"
+git = "https://github.com/crumblingstatue/glib-sys.git"
+branch = "integ"
