@@ -24,9 +24,15 @@ pub enum NotificationCreationError {
     Unknown
 }
 
+/// The context which within libnotify operates
 pub struct Context;
 
 impl Context {
+    /// Create a new context
+    ///
+    /// Arguments:
+    ///
+    /// - app_name: The name of the application using the context
     pub fn new(app_name: &str) -> Result<Context, ContextCreationError> {
         unsafe {
             if sys::notify_is_initted() == TRUE {
@@ -42,6 +48,13 @@ impl Context {
         }
         Ok(Context)
     }
+    /// Creates a new Notification.
+    ///
+    /// Arguments:
+    ///
+    /// - summary: Required summary text
+    /// - body: Optional body text
+    /// - icon: Optional icon theme icon name or filename
     pub fn new_notification(&self, summary: &str,
                                    body: Option<&str>,
                                    icon: Option<&str>)
@@ -93,12 +106,15 @@ impl Drop for Context {
     }
 }
 
+/// A passive pop-up notification
 pub struct Notification<'a> {
     handle: *mut sys::NotifyNotification,
     _phantom: PhantomData<&'a Context>
 }
 
 impl<'a> Notification<'a> {
+    /// Tells the notification server to display the notification
+    /// on the screen.
     pub fn show(&'a self) -> Result<(), ()> {
         unsafe {
             let mut err: *mut glib::GError = std::ptr::null_mut();
