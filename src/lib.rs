@@ -42,20 +42,40 @@ impl Context {
         }
         Ok(Context)
     }
-    pub fn new_notification(&self, summary: &str, body: &str)
+    pub fn new_notification(&self, summary: &str,
+                                   body: Option<&str>,
+                                   icon: Option<&str>)
         -> Result<Notification, NotificationCreationError> {
         let summary = match CString::new(summary) {
             Ok(cstr) => cstr,
             Err(_) => return Err(NotificationCreationError::NulError)
         };
-        let body = match CString::new(body) {
-            Ok(cstr) => cstr,
-            Err(_) => return Err(NotificationCreationError::NulError)
+        let body = match body {
+            Some(body) => match CString::new(body) {
+                Ok(cstr) => Some(cstr),
+                Err(_) => return Err(NotificationCreationError::NulError)
+            },
+            None => None
+        };
+        let body_ptr = match body {
+            Some(body) => body.as_ptr(),
+            None => std::ptr::null()
+        };
+        let icon = match icon {
+            Some(icon) => match CString::new(icon) {
+                Ok(cstr) => Some(cstr),
+                Err(_) => return Err(NotificationCreationError::NulError)
+            },
+            None => None
+        };
+        let icon_ptr = match icon {
+            Some(icon) => icon.as_ptr(),
+            None => std::ptr::null()
         };
         unsafe {
             let n = sys::notify_notification_new(summary.as_ptr(),
-                                                 body.as_ptr(),
-                                                 std::ptr::null());
+                                                 body_ptr,
+                                                 icon_ptr);
             if n.is_null() {
                 return Err(NotificationCreationError::Unknown);
             }
