@@ -24,7 +24,9 @@ pub enum NotificationCreationError {
     Unknown
 }
 
-/// The context which within libnotify operates
+/// The context which within libnotify operates.
+///
+/// Only one context can exist at a time.
 pub struct Context;
 
 impl Context {
