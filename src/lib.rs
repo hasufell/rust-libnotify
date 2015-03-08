@@ -1,5 +1,3 @@
-#![feature(std_misc)]
-
 extern crate "libnotify-sys" as sys;
 extern crate "glib-2_0-sys" as glib;
 
