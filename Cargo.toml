@@ -3,6 +3,11 @@
 name = "libnotify"
 version = "0.0.1"
 authors = ["Mika Attila <radiantstatue@gmail.com>"]
+license = "MIT"
+description = "Rust bindings to libnotify"
+readme = "README.md"
+repository = "https://github.com/crumblingstatue/rust-libnotify"
+keywords = ["libnotify", "notification"]
 
 [dependencies]
 libnotify-sys = "*"
