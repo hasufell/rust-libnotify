@@ -17,6 +17,7 @@ extern crate "glib-2_0-sys" as glib;
 
 use std::ffi::CString;
 use std::marker::PhantomData;
+use std::fmt;
 
 use glib::types::{
     TRUE,
@@ -32,10 +33,31 @@ pub enum ContextCreationError {
     NulError
 }
 
+impl fmt::Display for ContextCreationError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+        use ContextCreationError::*;
+        match *self {
+            AlreadyExists => write!(f, "A Libnotify context already exists."),
+            InitFailure => write!(f, "Failed to initialize libnotify."),
+            NulError => write!(f, "Argument contains a nul character.")
+        }
+    }
+}
+
 #[derive(Debug)]
 pub enum NotificationCreationError {
     NulError,
     Unknown
+}
+
+impl fmt::Display for NotificationCreationError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+        use NotificationCreationError::*;
+        match *self {
+            NulError => write!(f, "Argument contains a nul character."),
+            Unknown => write!(f, "Unknown error")
+        }
+    }
 }
 
 /// The context which within libnotify operates.
