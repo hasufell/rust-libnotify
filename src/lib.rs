@@ -1,3 +1,17 @@
+//! Rustic bindings to [libnotify](https://developer.gnome.org/libnotify/)
+//!
+//! ```rust
+//! extern crate libnotify;
+//!
+//! fn main() {
+//!    let notify = libnotify::Context::new("hello").unwrap();
+//!    let n = notify.new_notification("This is the summary.",
+//!                                    Some("This is the optional body text."),
+//!                                    None).unwrap();
+//!    n.show().unwrap();
+//! }
+//! ```
+
 extern crate "libnotify-sys" as sys;
 extern crate "glib-2_0-sys" as glib;
 
