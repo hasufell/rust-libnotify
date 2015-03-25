@@ -17,8 +17,8 @@
 //! }
 //! ```
 
-extern crate "libnotify-sys" as sys;
-extern crate "glib-2_0-sys" as glib;
+extern crate libnotify_sys as sys;
+extern crate glib_2_0_sys as glib;
 
 use std::ffi::CString;
 use std::marker::PhantomData;
