@@ -13,3 +13,4 @@ keywords = ["libnotify", "notification"]
 [dependencies]
 libnotify-sys = "*"
 glib-2_0-sys = "*"
+gtypes = "*"

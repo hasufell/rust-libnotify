@@ -19,12 +19,13 @@
 
 extern crate libnotify_sys as sys;
 extern crate glib_2_0_sys as glib;
+extern crate gtypes;
 
 use std::ffi::CString;
 use std::marker::PhantomData;
 use std::fmt;
 
-use glib::types::{
+use gtypes::{
     TRUE,
     FALSE
 };
