@@ -11,6 +11,6 @@ documentation = "http://crumblingstatue.github.io/doc/libnotify/libnotify/"
 keywords = ["libnotify", "notification"]
 
 [dependencies]
-libnotify-sys = "*"
-glib-2-0-sys = "*"
-gtypes = "*"
+libnotify-sys = "0.2.0"
+glib-2-0-sys = "0.46.0"
+gtypes = "0.1.2"
