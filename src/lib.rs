@@ -39,7 +39,7 @@ pub enum ContextCreationError {
 }
 
 impl fmt::Display for ContextCreationError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         use ContextCreationError::*;
         match *self {
             AlreadyExists => write!(f, "A Libnotify context already exists."),
@@ -56,7 +56,7 @@ pub enum NotificationCreationError {
 }
 
 impl fmt::Display for NotificationCreationError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         use NotificationCreationError::*;
         match *self {
             NulError => write!(f, "Argument contains a nul character."),
