@@ -1,20 +1,18 @@
 //! Rustic bindings to [libnotify](https://developer.gnome.org/libnotify/)
 //!
 //! ```rust
-//! extern crate libnotify;
+//!extern crate libnotify;
 //!
-//! fn main() {
-//!     let notify = libnotify::Context::new("hello").unwrap_or_else(|e| {
-//!         panic!("{}", e);
-//!     });
-//!     let body_text = Some("This is the optional body text.");
-//!     let n = notify.new_notification("This is the summary.",
-//!                                     body_text,
-//!                                     None).unwrap_or_else(|e| {
-//!         panic!("{}", e);
-//!     });
-//!     n.show().ok().expect("Failed to show notification");
-//! }
+//!fn main() {
+//!    let notify = libnotify::Context::new("hello").unwrap_or_else(|e| {
+//!        panic!("{}", e);
+//!    });
+//!    let body_text = Some("This is the optional body text.");
+//!    let n = notify.new_notification("This is the summary.", body_text, None)
+//!                  .unwrap_or_else(|e| panic!("{}", e));
+//!    n.show().unwrap_or_else(|e| panic!("{}", e));
+//!}
+//!
 //! ```
 
 extern crate libnotify_sys as sys;
