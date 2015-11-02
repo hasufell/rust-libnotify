@@ -5,8 +5,7 @@ fn main() {
         panic!("{}", e);
     });
     let body_text = Some("This is the optional body text.");
-    let n = notify.new_notification("This is the summary.",
-                                    body_text,
-                                    None).unwrap_or_else(|e| panic!("{}", e));
-    n.show().ok().expect("Failed to show notification");
+    let n = notify.new_notification("This is the summary.", body_text, None)
+                  .unwrap_or_else(|e| panic!("{}", e));
+    n.show().unwrap_or_else(|e| panic!("{}", e));
 }

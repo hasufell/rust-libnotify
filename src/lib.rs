@@ -21,9 +21,10 @@ extern crate libnotify_sys as sys;
 extern crate glib_2_0_sys as glib;
 extern crate gtypes;
 
-use std::ffi::CString;
+use std::ffi::{CStr, CString};
 use std::marker::PhantomData;
 use std::fmt;
+use std::error::Error;
 
 use gtypes::{TRUE, FALSE};
 
@@ -158,15 +159,35 @@ pub struct Notification<'a> {
 impl<'a> Notification<'a> {
     /// Tells the notification server to display the notification
     /// on the screen.
-    pub fn show(&'a self) -> Result<(), ()> {
+    pub fn show(&'a self) -> Result<(), NotificationShowError> {
         unsafe {
             let mut err: *mut glib::GError = std::ptr::null_mut();
             sys::notify_notification_show(self.handle, &mut err);
             if !err.is_null() {
+                let result = Err(NotificationShowError {
+                    message: CStr::from_ptr((*err).message).to_string_lossy().into_owned(),
+                });
                 glib::g_error_free(err);
-                return Err(());
+                return result;
             }
             return Ok(());
         }
+    }
+}
+
+#[derive(Debug)]
+pub struct NotificationShowError {
+    message: String,
+}
+
+impl fmt::Display for NotificationShowError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Error showing notification: {}", self.message)
+    }
+}
+
+impl Error for NotificationShowError {
+    fn description(&self) -> &str {
+        "Notification show error"
     }
 }
