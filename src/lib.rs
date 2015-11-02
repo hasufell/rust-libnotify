@@ -25,10 +25,7 @@ use std::ffi::CString;
 use std::marker::PhantomData;
 use std::fmt;
 
-use gtypes::{
-    TRUE,
-    FALSE
-};
+use gtypes::{TRUE, FALSE};
 
 /// Error that can happen on context creation
 #[derive(Debug)]
@@ -36,7 +33,7 @@ pub enum ContextCreationError {
     /// Context already exists
     AlreadyExists,
     InitFailure,
-    NulError
+    NulError,
 }
 
 impl fmt::Display for ContextCreationError {
@@ -45,7 +42,7 @@ impl fmt::Display for ContextCreationError {
         match *self {
             AlreadyExists => write!(f, "A Libnotify context already exists."),
             InitFailure => write!(f, "Failed to initialize libnotify."),
-            NulError => write!(f, "Argument contains a nul character.")
+            NulError => write!(f, "Argument contains a nul character."),
         }
     }
 }
@@ -53,7 +50,7 @@ impl fmt::Display for ContextCreationError {
 #[derive(Debug)]
 pub enum NotificationCreationError {
     NulError,
-    Unknown
+    Unknown,
 }
 
 impl fmt::Display for NotificationCreationError {
@@ -61,7 +58,7 @@ impl fmt::Display for NotificationCreationError {
         use NotificationCreationError::*;
         match *self {
             NulError => write!(f, "Argument contains a nul character."),
-            Unknown => write!(f, "Unknown error")
+            Unknown => write!(f, "Unknown error"),
         }
     }
 }
@@ -84,7 +81,7 @@ impl Context {
             }
             let app_name = match CString::new(app_name) {
                 Ok(name) => name,
-                Err(_) => return Err(ContextCreationError::NulError)
+                Err(_) => return Err(ContextCreationError::NulError),
             };
             if sys::notify_init(app_name.as_ptr()) == FALSE {
                 return Err(ContextCreationError::InitFailure);
@@ -99,45 +96,47 @@ impl Context {
     /// - summary: Required summary text
     /// - body: Optional body text
     /// - icon: Optional icon theme icon name or filename
-    pub fn new_notification(&self, summary: &str,
-                                   body: Option<&str>,
-                                   icon: Option<&str>)
-        -> Result<Notification, NotificationCreationError> {
+    pub fn new_notification(&self,
+                            summary: &str,
+                            body: Option<&str>,
+                            icon: Option<&str>)
+                            -> Result<Notification, NotificationCreationError> {
         let summary = match CString::new(summary) {
             Ok(cstr) => cstr,
-            Err(_) => return Err(NotificationCreationError::NulError)
+            Err(_) => return Err(NotificationCreationError::NulError),
         };
         let body = match body {
             Some(body) => match CString::new(body) {
                 Ok(cstr) => Some(cstr),
-                Err(_) => return Err(NotificationCreationError::NulError)
+                Err(_) => return Err(NotificationCreationError::NulError),
             },
-            None => None
+            None => None,
         };
         let body_ptr = match body {
             Some(body) => body.as_ptr(),
-            None => std::ptr::null()
+            None => std::ptr::null(),
         };
         let icon = match icon {
             Some(icon) => match CString::new(icon) {
                 Ok(cstr) => Some(cstr),
-                Err(_) => return Err(NotificationCreationError::NulError)
+                Err(_) => return Err(NotificationCreationError::NulError),
             },
-            None => None
+            None => None,
         };
         let icon_ptr = match icon {
             Some(icon) => icon.as_ptr(),
-            None => std::ptr::null()
+            None => std::ptr::null(),
         };
         unsafe {
-            let n = sys::notify_notification_new(summary.as_ptr(),
-                                                 body_ptr,
-                                                 icon_ptr);
+            let n = sys::notify_notification_new(summary.as_ptr(), body_ptr, icon_ptr);
             if n.is_null() {
                 return Err(NotificationCreationError::Unknown);
             }
 
-            Ok(Notification{handle: n, _phantom: PhantomData})
+            Ok(Notification {
+                handle: n,
+                _phantom: PhantomData,
+            })
         }
     }
 }
@@ -153,7 +152,7 @@ impl Drop for Context {
 /// A passive pop-up notification
 pub struct Notification<'a> {
     handle: *mut sys::NotifyNotification,
-    _phantom: PhantomData<&'a Context>
+    _phantom: PhantomData<&'a Context>,
 }
 
 impl<'a> Notification<'a> {
@@ -165,9 +164,9 @@ impl<'a> Notification<'a> {
             sys::notify_notification_show(self.handle, &mut err);
             if !err.is_null() {
                 glib::g_error_free(err);
-                return Err(())
+                return Err(());
             }
-            return Ok(())
+            return Ok(());
         }
     }
 }
