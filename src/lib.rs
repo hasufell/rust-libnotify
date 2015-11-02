@@ -15,6 +15,8 @@
 //!
 //! ```
 
+#![warn(missing_docs)]
+
 extern crate libnotify_sys as sys;
 extern crate glib_2_0_sys as glib;
 extern crate gtypes;
