@@ -31,9 +31,10 @@ use gtypes::{TRUE, FALSE};
 /// Error that can happen on context creation
 #[derive(Debug)]
 pub enum ContextCreationError {
-    /// Context already exists
+    /// Context already exists.
     AlreadyExists,
-    InitFailure,
+    /// Failed to initialize libnotify.
+    InitError,
     NulError,
 }
 
@@ -42,7 +43,7 @@ impl fmt::Display for ContextCreationError {
         use ContextCreationError::*;
         match *self {
             AlreadyExists => write!(f, "A Libnotify context already exists."),
-            InitFailure => write!(f, "Failed to initialize libnotify."),
+            InitError => write!(f, "Failed to initialize libnotify."),
             NulError => write!(f, "Argument contains a nul character."),
         }
     }
@@ -85,7 +86,7 @@ impl Context {
                 Err(_) => return Err(ContextCreationError::NulError),
             };
             if sys::notify_init(app_name.as_ptr()) == FALSE {
-                return Err(ContextCreationError::InitFailure);
+                return Err(ContextCreationError::InitError);
             }
         }
         Ok(Context)
