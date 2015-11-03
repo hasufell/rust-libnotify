@@ -21,7 +21,7 @@ extern crate libnotify_sys as sys;
 extern crate glib_2_0_sys as glib;
 extern crate gtypes;
 
-use std::ffi::{CStr, CString};
+use std::ffi::{self, CStr, CString};
 use std::marker::PhantomData;
 use std::fmt;
 use std::error::Error;
@@ -35,7 +35,8 @@ pub enum ContextCreationError {
     AlreadyExists,
     /// Failed to initialize libnotify.
     InitError,
-    NulError,
+    /// A nul byte was found in the provided string.
+    NulError(ffi::NulError),
 }
 
 impl fmt::Display for ContextCreationError {
@@ -44,14 +45,16 @@ impl fmt::Display for ContextCreationError {
         match *self {
             AlreadyExists => write!(f, "A Libnotify context already exists."),
             InitError => write!(f, "Failed to initialize libnotify."),
-            NulError => write!(f, "Argument contains a nul character."),
+            NulError(ref e) => write!(f, "{}", e),
         }
     }
 }
 
 #[derive(Debug)]
 pub enum NotificationCreationError {
-    NulError,
+    /// A nul byte was found in the provided string.
+    NulError(ffi::NulError),
+    /// An unknown error happened.
     Unknown,
 }
 
@@ -59,7 +62,7 @@ impl fmt::Display for NotificationCreationError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         use NotificationCreationError::*;
         match *self {
-            NulError => write!(f, "Argument contains a nul character."),
+            NulError(ref e) => write!(f, "{}", e),
             Unknown => write!(f, "Unknown error"),
         }
     }
@@ -83,7 +86,7 @@ impl Context {
             }
             let app_name = match CString::new(app_name) {
                 Ok(name) => name,
-                Err(_) => return Err(ContextCreationError::NulError),
+                Err(e) => return Err(ContextCreationError::NulError(e)),
             };
             if sys::notify_init(app_name.as_ptr()) == FALSE {
                 return Err(ContextCreationError::InitError);
@@ -105,12 +108,12 @@ impl Context {
                             -> Result<Notification, NotificationCreationError> {
         let summary = match CString::new(summary) {
             Ok(cstr) => cstr,
-            Err(_) => return Err(NotificationCreationError::NulError),
+            Err(e) => return Err(NotificationCreationError::NulError(e)),
         };
         let body = match body {
             Some(body) => match CString::new(body) {
                 Ok(cstr) => Some(cstr),
-                Err(_) => return Err(NotificationCreationError::NulError),
+                Err(e) => return Err(NotificationCreationError::NulError(e)),
             },
             None => None,
         };
@@ -121,7 +124,7 @@ impl Context {
         let icon = match icon {
             Some(icon) => match CString::new(icon) {
                 Ok(cstr) => Some(cstr),
-                Err(_) => return Err(NotificationCreationError::NulError),
+                Err(e) => return Err(NotificationCreationError::NulError(e)),
             },
             None => None,
         };
