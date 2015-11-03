@@ -4,13 +4,15 @@
 //! extern crate libnotify;
 //!
 //! fn main() {
-//!     let notify = libnotify::Context::new("hello").unwrap_or_else(|e| {
-//!         panic!("{}", e);
-//!     });
-//!     let body_text = Some("This is the optional body text.");
-//!     let n = notify.new_notification("This is the summary.", body_text, None)
-//!                   .unwrap_or_else(|e| panic!("{}", e));
-//!     n.show().unwrap_or_else(|e| panic!("{}", e));
+//!     // Create a libnotify context
+//!     let notify = libnotify::Context::new("myapp").unwrap();
+//!     // Create a new notification and show it
+//!     let n = notify.new_notification("Summary",
+//!                                     Some("Optional Body"),
+//!                                     None).unwrap();
+//!     n.show().unwrap();
+//!     // You can also use the .show() convenience method on the context
+//!     notify.show("I am another notification", None, None).unwrap();
 //! }
 //!
 //! ```
@@ -81,6 +83,12 @@ impl From<ffi::NulError> for NotificationCreationError {
     }
 }
 
+impl Error for NotificationCreationError {
+    fn description(&self) -> &str {
+        "notification creation error"
+    }
+}
+
 /// The context which within libnotify operates.
 ///
 /// Only one context can exist at a time.
@@ -145,6 +153,19 @@ impl Context {
             })
         }
     }
+    /// Show a notification.
+    ///
+    /// This is a convenience method that creates a new notification,
+    /// and shows it in one step.
+    pub fn show(&self,
+                summary: &str,
+                body: Option<&str>,
+                icon: Option<&str>)
+                -> Result<(), Box<Error>> {
+        let notif = try!(self.new_notification(summary, body, icon));
+        try!(notif.show());
+        Ok(())
+    }
 }
 
 impl Drop for Context {
@@ -194,6 +215,6 @@ impl fmt::Display for NotificationShowError {
 
 impl Error for NotificationShowError {
     fn description(&self) -> &str {
-        "Notification show error"
+        "notification show error"
     }
 }

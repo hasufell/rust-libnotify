@@ -1,11 +1,11 @@
 extern crate libnotify;
 
 fn main() {
-    let notify = libnotify::Context::new("hello").unwrap_or_else(|e| {
-        panic!("{}", e);
-    });
-    let body_text = Some("This is the optional body text.");
-    let n = notify.new_notification("This is the summary.", body_text, None)
-                  .unwrap_or_else(|e| panic!("{}", e));
-    n.show().unwrap_or_else(|e| panic!("{}", e));
+    // Create a libnotify context
+    let notify = libnotify::Context::new("myapp").unwrap();
+    // Create a new notification and show it
+    let n = notify.new_notification("Summary", Some("Optional Body"), None).unwrap();
+    n.show().unwrap();
+    // You can also use the .show() convenience method on the context
+    notify.show("I am another notification", None, None).unwrap();
 }
