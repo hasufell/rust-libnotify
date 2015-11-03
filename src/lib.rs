@@ -1,17 +1,17 @@
 //! Rustic bindings to [libnotify](https://developer.gnome.org/libnotify/)
 //!
 //! ```rust
-//!extern crate libnotify;
+//! extern crate libnotify;
 //!
-//!fn main() {
-//!    let notify = libnotify::Context::new("hello").unwrap_or_else(|e| {
-//!        panic!("{}", e);
-//!    });
-//!    let body_text = Some("This is the optional body text.");
-//!    let n = notify.new_notification("This is the summary.", body_text, None)
-//!                  .unwrap_or_else(|e| panic!("{}", e));
-//!    n.show().unwrap_or_else(|e| panic!("{}", e));
-//!}
+//! fn main() {
+//!     let notify = libnotify::Context::new("hello").unwrap_or_else(|e| {
+//!         panic!("{}", e);
+//!     });
+//!     let body_text = Some("This is the optional body text.");
+//!     let n = notify.new_notification("This is the summary.", body_text, None)
+//!                   .unwrap_or_else(|e| panic!("{}", e));
+//!     n.show().unwrap_or_else(|e| panic!("{}", e));
+//! }
 //!
 //! ```
 
@@ -50,6 +50,12 @@ impl fmt::Display for ContextCreationError {
     }
 }
 
+impl From<ffi::NulError> for ContextCreationError {
+    fn from(src: ffi::NulError) -> Self {
+        ContextCreationError::NulError(src)
+    }
+}
+
 #[derive(Debug)]
 /// An error that can happen when attempting to create a notification.
 pub enum NotificationCreationError {
@@ -69,6 +75,12 @@ impl fmt::Display for NotificationCreationError {
     }
 }
 
+impl From<ffi::NulError> for NotificationCreationError {
+    fn from(src: ffi::NulError) -> Self {
+        NotificationCreationError::NulError(src)
+    }
+}
+
 /// The context which within libnotify operates.
 ///
 /// Only one context can exist at a time.
@@ -85,10 +97,7 @@ impl Context {
             if sys::notify_is_initted() == TRUE {
                 return Err(ContextCreationError::AlreadyExists);
             }
-            let app_name = match CString::new(app_name) {
-                Ok(name) => name,
-                Err(e) => return Err(ContextCreationError::NulError(e)),
-            };
+            let app_name = try!(CString::new(app_name));
             if sys::notify_init(app_name.as_ptr()) == FALSE {
                 return Err(ContextCreationError::InitError);
             }
@@ -107,15 +116,9 @@ impl Context {
                             body: Option<&str>,
                             icon: Option<&str>)
                             -> Result<Notification, NotificationCreationError> {
-        let summary = match CString::new(summary) {
-            Ok(cstr) => cstr,
-            Err(e) => return Err(NotificationCreationError::NulError(e)),
-        };
+        let summary = try!(CString::new(summary));
         let body = match body {
-            Some(body) => match CString::new(body) {
-                Ok(cstr) => Some(cstr),
-                Err(e) => return Err(NotificationCreationError::NulError(e)),
-            },
+            Some(body) => Some(try!(CString::new(body))),
             None => None,
         };
         let body_ptr = match body {
@@ -123,10 +126,7 @@ impl Context {
             None => std::ptr::null(),
         };
         let icon = match icon {
-            Some(icon) => match CString::new(icon) {
-                Ok(cstr) => Some(cstr),
-                Err(e) => return Err(NotificationCreationError::NulError(e)),
-            },
+            Some(icon) => Some(try!(CString::new(icon))),
             None => None,
         };
         let icon_ptr = match icon {
