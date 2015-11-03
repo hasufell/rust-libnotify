@@ -175,7 +175,7 @@ impl<'a> Notification<'a> {
                 glib::g_error_free(err);
                 return result;
             }
-            return Ok(());
+            Ok(())
         }
     }
 }
