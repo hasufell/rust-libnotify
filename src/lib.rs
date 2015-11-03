@@ -51,6 +51,7 @@ impl fmt::Display for ContextCreationError {
 }
 
 #[derive(Debug)]
+/// An error that can happen when attempting to create a notification.
 pub enum NotificationCreationError {
     /// A nul byte was found in the provided string.
     NulError(ffi::NulError),
@@ -179,6 +180,7 @@ impl<'a> Notification<'a> {
     }
 }
 
+/// An error that can happen when attempting to show a notification.
 #[derive(Debug)]
 pub struct NotificationShowError {
     message: String,
