@@ -66,6 +66,8 @@ pub enum NotificationCreationError {
     NulError(ffi::NulError),
     /// An unknown error happened.
     Unknown,
+    /// Invalid parameter passed to a glib function
+    InvalidParameter,
 }
 
 impl fmt::Display for NotificationCreationError {
@@ -74,6 +76,7 @@ impl fmt::Display for NotificationCreationError {
         match *self {
             NulError(ref e) => write!(f, "{}", e),
             Unknown => write!(f, "Unknown error"),
+            InvalidParameter => write!(f, "An invalid parameter was passed"),
         }
     }
 }
@@ -212,6 +215,44 @@ impl<'a> Notification<'a> {
                                                  _timeout)
 
         }
+    }
+
+    /// Updates the notification text and icon. This won't send the update
+    /// out and display it on the screen. For that, you will need to
+    /// call `.show()`.
+    pub fn update(&self,
+                  summary: &str,
+                  body: Option<&str>,
+                  icon: Option<&str>) -> Result<(), NotificationCreationError> {
+        let summary = try!(CString::new(summary));
+        let body = match body {
+            Some(body) => Some(try!(CString::new(body))),
+            None => None,
+        };
+        let body_ptr = match body {
+            Some(ref body) => body.as_ptr(),
+            None => std::ptr::null(),
+        };
+        let icon = match icon {
+            Some(icon) => Some(try!(CString::new(icon))),
+            None => None,
+        };
+        let icon_ptr = match icon {
+            Some(ref icon) => icon.as_ptr(),
+            None => std::ptr::null(),
+        };
+
+        unsafe {
+            let b = sys::notify_notification_update(self.handle,
+                                       summary.as_ptr(),
+                                       body_ptr,
+                                       icon_ptr);
+            if b == FALSE {
+                return Err(NotificationCreationError::InvalidParameter);
+            }
+        }
+
+        return Ok(());
     }
 }
 
