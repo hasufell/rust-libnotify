@@ -358,6 +358,27 @@ impl<'a> Notification<'a> {
             sys::notify_notification_clear_hints(self.handle);
         }
     }
+
+    /// Synchronously tells the notification server to hide the
+    /// notification on the screen.
+    pub fn close(&self) -> Result<(), NotificationShowError> {
+        unsafe {
+            let mut err: *mut glib_sys::GError = std::ptr::null_mut();
+            sys::notify_notification_close(self.handle,
+                                           &mut err);
+
+            if !err.is_null() {
+                let result = Err(NotificationShowError {
+                                     message: CStr::from_ptr((*err).message)
+                                         .to_string_lossy()
+                                         .into_owned(),
+                                 });
+                glib_sys::g_error_free(err);
+                return result;
+            }
+        }
+        return Ok(());
+    }
 }
 
 
