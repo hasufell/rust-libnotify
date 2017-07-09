@@ -33,6 +33,36 @@ use std::marker::PhantomData;
 use std::os::raw::c_int;
 
 
+/// The urgency level of the notification.
+pub enum Urgency {
+    /// Low urgency. Used for unimportant notifications.
+    Low,
+    /// Normal urgency. Used for most standard notifications.
+    Normal,
+    /// Critical urgency. Used for very important notifications.
+    Critical,
+}
+
+impl From<sys::NotifyUrgency> for Urgency {
+    fn from(urgency: sys::NotifyUrgency) -> Urgency {
+        match urgency {
+            sys::NotifyUrgency::NotifyUrgencyLow => Urgency::Low,
+            sys::NotifyUrgency::NotifyUrgencyNormal => Urgency::Normal,
+            sys::NotifyUrgency::NotifyUrgencyCritical => Urgency::Critical,
+        }
+    }
+}
+
+impl From<Urgency> for sys::NotifyUrgency {
+    fn from(urgency: Urgency) -> sys::NotifyUrgency {
+        match urgency {
+            Urgency::Low => sys::NotifyUrgency::NotifyUrgencyLow,
+            Urgency::Normal => sys::NotifyUrgency::NotifyUrgencyNormal,
+            Urgency::Critical => sys::NotifyUrgency::NotifyUrgencyCritical,
+        }
+    }
+}
+
 
 /// Error that can happen on context creation
 #[derive(Debug)]
@@ -297,6 +327,16 @@ impl<'a> Notification<'a> {
         }
 
         return Ok(());
+    }
+
+    /// Sets the urgency level of this notification.
+    pub fn set_urgency(&self, urgency: Urgency) {
+        let urgency: sys::NotifyUrgency = From::from(urgency);
+
+        unsafe {
+            sys::notify_notification_set_urgency(self.handle,
+                                             urgency);
+        }
     }
 }
 
