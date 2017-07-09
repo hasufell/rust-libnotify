@@ -24,6 +24,7 @@ extern crate glib_sys;
 extern crate gtypes;
 
 use std::ffi::{self, CStr, CString};
+use std::os::raw::c_int;
 use std::marker::PhantomData;
 use std::fmt;
 use std::error::Error;
@@ -198,6 +199,18 @@ impl<'a> Notification<'a> {
                 return result;
             }
             Ok(())
+        }
+    }
+
+    /// Set the notification timeout. Note that the server might ignore
+    /// the timeout.
+    pub fn set_notification_timeout(&self, timeout: i32) {
+        let _timeout: c_int = From::from(timeout);
+
+        unsafe {
+            sys::notify_notification_set_timeout(self.handle,
+                                                 _timeout)
+
         }
     }
 }
