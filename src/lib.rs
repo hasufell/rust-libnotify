@@ -21,6 +21,7 @@
 
 extern crate libnotify_sys as sys;
 extern crate glib_sys;
+extern crate glib;
 extern crate gtypes;
 
 use std::ffi::{self, CStr, CString};
@@ -28,6 +29,7 @@ use std::os::raw::c_int;
 use std::marker::PhantomData;
 use std::fmt;
 use std::error::Error;
+use glib::translate::*;
 
 use gtypes::{TRUE, FALSE};
 
@@ -250,6 +252,27 @@ impl<'a> Notification<'a> {
             if b == FALSE {
                 return Err(NotificationCreationError::InvalidParameter);
             }
+        }
+
+        return Ok(());
+    }
+
+    /// Sets a hint for `key` with value `value`. If value is `None`,
+    /// then key is unset.
+    pub fn set_hint(&self, key: &str, value: Option<glib::variant::Variant>) -> Result<(), NotificationCreationError> {
+        let key = try!(CString::new(key));
+
+        let gvalue: *mut glib_sys::GVariant = {
+            match value {
+                Some(ref value) => value.to_glib_none().0,
+                None => std::ptr::null_mut(),
+            }
+        };
+
+        unsafe {
+            sys::notify_notification_set_hint(self.handle,
+                                         key.as_ptr(),
+                                         gvalue)
         }
 
         return Ok(());
