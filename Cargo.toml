@@ -2,7 +2,7 @@
 
 name = "libnotify"
 version = "0.4.0"
-authors = ["Mika Attila <radiantstatue@gmail.com>"]
+authors = ["Mika Attila <radiantstatue@gmail.com>", "Julian Ospald <hasufell@posteo.de>"]
 license = "MIT"
 description = "Rust bindings to libnotify"
 readme = "README.md"
