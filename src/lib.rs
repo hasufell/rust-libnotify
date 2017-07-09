@@ -286,6 +286,18 @@ impl<'a> Notification<'a> {
 
         return Ok(());
     }
+
+    /// Sets the category of this notification. This can be used by the
+    /// notification server to filter or display the data in a certain way.
+    pub fn set_category(&self, category: &str) -> Result<(), NotificationCreationError> {
+        let category = try!(CString::new(category));
+        unsafe {
+            sys::notify_notification_set_category(self.handle,
+                                                   category.as_ptr());
+        }
+
+        return Ok(());
+    }
 }
 
 
