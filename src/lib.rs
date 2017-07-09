@@ -20,7 +20,7 @@
 #![warn(missing_docs)]
 
 extern crate libnotify_sys as sys;
-extern crate glib_2_0_sys as glib;
+extern crate glib_sys;
 extern crate gtypes;
 
 use std::ffi::{self, CStr, CString};
@@ -188,13 +188,13 @@ impl<'a> Notification<'a> {
     /// on the screen.
     pub fn show(&'a self) -> Result<(), NotificationShowError> {
         unsafe {
-            let mut err: *mut glib::GError = std::ptr::null_mut();
+            let mut err: *mut glib_sys::GError = std::ptr::null_mut();
             sys::notify_notification_show(self.handle, &mut err);
             if !err.is_null() {
                 let result = Err(NotificationShowError {
                     message: CStr::from_ptr((*err).message).to_string_lossy().into_owned(),
                 });
-                glib::g_error_free(err);
+                glib_sys::g_error_free(err);
                 return result;
             }
             Ok(())
