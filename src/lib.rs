@@ -19,19 +19,20 @@
 
 #![warn(missing_docs)]
 
-extern crate libnotify_sys as sys;
-extern crate glib_sys;
 extern crate glib;
+extern crate glib_sys;
 extern crate gtypes;
+extern crate libnotify_sys as sys;
 
-use std::ffi::{self, CStr, CString};
-use std::os::raw::c_int;
-use std::marker::PhantomData;
-use std::fmt;
-use std::error::Error;
 use glib::translate::*;
-
 use gtypes::{TRUE, FALSE};
+use std::error::Error;
+use std::ffi::{self, CStr, CString};
+use std::fmt;
+use std::marker::PhantomData;
+use std::os::raw::c_int;
+
+
 
 /// Error that can happen on context creation
 #[derive(Debug)]
@@ -60,6 +61,7 @@ impl From<ffi::NulError> for ContextCreationError {
         ContextCreationError::NulError(src)
     }
 }
+
 
 #[derive(Debug)]
 /// An error that can happen when attempting to create a notification.
@@ -95,6 +97,7 @@ impl Error for NotificationCreationError {
     }
 }
 
+
 /// The context which within libnotify operates.
 ///
 /// Only one context can exist at a time.
@@ -118,6 +121,7 @@ impl Context {
         }
         Ok(Context)
     }
+
     /// Creates a new Notification.
     ///
     /// Arguments:
@@ -125,11 +129,12 @@ impl Context {
     /// - summary: Required summary text
     /// - body: Optional body text
     /// - icon: Optional icon theme icon name or filename
-    pub fn new_notification(&self,
-                            summary: &str,
-                            body: Option<&str>,
-                            icon: Option<&str>)
-                            -> Result<Notification, NotificationCreationError> {
+    pub fn new_notification
+        (&self,
+         summary: &str,
+         body: Option<&str>,
+         icon: Option<&str>)
+         -> Result<Notification, NotificationCreationError> {
         let summary = try!(CString::new(summary));
         let body = match body {
             Some(body) => Some(try!(CString::new(body))),
@@ -149,17 +154,20 @@ impl Context {
         };
 
         unsafe {
-            let n = sys::notify_notification_new(summary.as_ptr(), body_ptr, icon_ptr);
+            let n = sys::notify_notification_new(summary.as_ptr(),
+                                                 body_ptr,
+                                                 icon_ptr);
             if n.is_null() {
                 return Err(NotificationCreationError::Unknown);
             }
 
             Ok(Notification {
-                handle: n,
-                _phantom: PhantomData,
-            })
+                   handle: n,
+                   _phantom: PhantomData,
+               })
         }
     }
+
     /// Show a notification.
     ///
     /// This is a convenience method that creates a new notification,
@@ -183,6 +191,7 @@ impl Drop for Context {
     }
 }
 
+
 /// A passive pop-up notification
 pub struct Notification<'a> {
     handle: *mut sys::NotifyNotification,
@@ -198,8 +207,10 @@ impl<'a> Notification<'a> {
             sys::notify_notification_show(self.handle, &mut err);
             if !err.is_null() {
                 let result = Err(NotificationShowError {
-                    message: CStr::from_ptr((*err).message).to_string_lossy().into_owned(),
-                });
+                                     message: CStr::from_ptr((*err).message)
+                                         .to_string_lossy()
+                                         .into_owned(),
+                                 });
                 glib_sys::g_error_free(err);
                 return result;
             }
@@ -212,11 +223,7 @@ impl<'a> Notification<'a> {
     pub fn set_notification_timeout(&self, timeout: i32) {
         let _timeout: c_int = From::from(timeout);
 
-        unsafe {
-            sys::notify_notification_set_timeout(self.handle,
-                                                 _timeout)
-
-        }
+        unsafe { sys::notify_notification_set_timeout(self.handle, _timeout) }
     }
 
     /// Updates the notification text and icon. This won't send the update
@@ -225,7 +232,8 @@ impl<'a> Notification<'a> {
     pub fn update(&self,
                   summary: &str,
                   body: Option<&str>,
-                  icon: Option<&str>) -> Result<(), NotificationCreationError> {
+                  icon: Option<&str>)
+                  -> Result<(), NotificationCreationError> {
         let summary = try!(CString::new(summary));
         let body = match body {
             Some(body) => Some(try!(CString::new(body))),
@@ -246,9 +254,9 @@ impl<'a> Notification<'a> {
 
         unsafe {
             let b = sys::notify_notification_update(self.handle,
-                                       summary.as_ptr(),
-                                       body_ptr,
-                                       icon_ptr);
+                                                    summary.as_ptr(),
+                                                    body_ptr,
+                                                    icon_ptr);
             if b == FALSE {
                 return Err(NotificationCreationError::InvalidParameter);
             }
@@ -259,7 +267,10 @@ impl<'a> Notification<'a> {
 
     /// Sets a hint for `key` with value `value`. If value is `None`,
     /// then key is unset.
-    pub fn set_hint(&self, key: &str, value: Option<glib::variant::Variant>) -> Result<(), NotificationCreationError> {
+    pub fn set_hint(&self,
+                    key: &str,
+                    value: Option<glib::variant::Variant>)
+                    -> Result<(), NotificationCreationError> {
         let key = try!(CString::new(key));
 
         let gvalue: *mut glib_sys::GVariant = {
@@ -270,14 +281,13 @@ impl<'a> Notification<'a> {
         };
 
         unsafe {
-            sys::notify_notification_set_hint(self.handle,
-                                         key.as_ptr(),
-                                         gvalue)
+            sys::notify_notification_set_hint(self.handle, key.as_ptr(), gvalue)
         }
 
         return Ok(());
     }
 }
+
 
 /// An error that can happen when attempting to show a notification.
 #[derive(Debug)]
