@@ -351,6 +351,13 @@ impl<'a> Notification<'a> {
                                                             pixbuf);
         }
     }
+
+    /// Clears all hints from the notification.
+    pub fn clear_hints(&self) {
+        unsafe {
+            sys::notify_notification_clear_hints(self.handle);
+        }
+    }
 }
 
 
