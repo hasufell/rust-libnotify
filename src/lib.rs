@@ -130,7 +130,7 @@ impl Context {
             None => None,
         };
         let body_ptr = match body {
-            Some(body) => body.as_ptr(),
+            Some(ref body) => body.as_ptr(),
             None => std::ptr::null(),
         };
         let icon = match icon {
@@ -138,9 +138,10 @@ impl Context {
             None => None,
         };
         let icon_ptr = match icon {
-            Some(icon) => icon.as_ptr(),
+            Some(ref icon) => icon.as_ptr(),
             None => std::ptr::null(),
         };
+
         unsafe {
             let n = sys::notify_notification_new(summary.as_ptr(), body_ptr, icon_ptr);
             if n.is_null() {
