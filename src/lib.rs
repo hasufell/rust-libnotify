@@ -19,6 +19,8 @@
 
 #![warn(missing_docs)]
 
+#[macro_use]
+extern crate error_chain;
 extern crate gdk_pixbuf;
 extern crate gdk_pixbuf_sys;
 extern crate glib;
@@ -26,14 +28,24 @@ extern crate glib_sys;
 extern crate gtypes;
 extern crate libnotify_sys as sys;
 
+pub mod errors;
+
+use errors::*;
 use gdk_pixbuf_sys::GdkPixbuf;
-use glib::translate::*;
+use glib::translate::ToGlibPtr;
 use gtypes::{TRUE, FALSE};
-use std::error::Error;
-use std::ffi::{self, CStr, CString};
-use std::fmt;
-use std::marker::PhantomData;
+use std::ffi::{CStr, CString};
 use std::os::raw::c_int;
+use std::os::raw::c_char;
+
+
+macro_rules! init_panic {
+    () => {
+        if !is_initted() {
+            panic!("Notify system not initialized, invalid call of function");
+        }
+    }
+}
 
 
 /// The urgency level of the notification.
@@ -67,94 +79,14 @@ impl From<Urgency> for sys::NotifyUrgency {
 }
 
 
-/// Error that can happen on context creation
-#[derive(Debug)]
-pub enum ContextCreationError {
-    /// Context already exists.
-    AlreadyExists,
-    /// Failed to initialize libnotify.
-    InitError,
-    /// A nul byte was found in the provided string.
-    NulError(ffi::NulError),
+
+
+/// A passive pop-up notification
+pub struct Notification {
+    handle: *mut sys::NotifyNotification,
 }
 
-impl fmt::Display for ContextCreationError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        use ContextCreationError::*;
-        match *self {
-            AlreadyExists => write!(f, "A Libnotify context already exists."),
-            InitError => write!(f, "Failed to initialize libnotify."),
-            NulError(ref e) => write!(f, "{}", e),
-        }
-    }
-}
-
-impl From<ffi::NulError> for ContextCreationError {
-    fn from(src: ffi::NulError) -> Self {
-        ContextCreationError::NulError(src)
-    }
-}
-
-
-#[derive(Debug)]
-/// An error that can happen when attempting to create a notification.
-pub enum NotificationCreationError {
-    /// A nul byte was found in the provided string.
-    NulError(ffi::NulError),
-    /// An unknown error happened.
-    Unknown,
-    /// Invalid parameter passed to a glib function
-    InvalidParameter,
-}
-
-impl fmt::Display for NotificationCreationError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        use NotificationCreationError::*;
-        match *self {
-            NulError(ref e) => write!(f, "{}", e),
-            Unknown => write!(f, "Unknown error"),
-            InvalidParameter => write!(f, "An invalid parameter was passed"),
-        }
-    }
-}
-
-impl From<ffi::NulError> for NotificationCreationError {
-    fn from(src: ffi::NulError) -> Self {
-        NotificationCreationError::NulError(src)
-    }
-}
-
-impl Error for NotificationCreationError {
-    fn description(&self) -> &str {
-        "notification creation error"
-    }
-}
-
-
-/// The context which within libnotify operates.
-///
-/// Only one context can exist at a time.
-pub struct Context;
-
-impl Context {
-    /// Create a new context
-    ///
-    /// Arguments:
-    ///
-    /// - app_name: The name of the application using the context
-    pub fn new(app_name: &str) -> Result<Context, ContextCreationError> {
-        unsafe {
-            if sys::notify_is_initted() == TRUE {
-                return Err(ContextCreationError::AlreadyExists);
-            }
-            let app_name = try!(CString::new(app_name));
-            if sys::notify_init(app_name.as_ptr()) == FALSE {
-                return Err(ContextCreationError::InitError);
-            }
-        }
-        Ok(Context)
-    }
-
+impl Notification {
     /// Creates a new Notification.
     ///
     /// Arguments:
@@ -162,15 +94,14 @@ impl Context {
     /// - summary: Required summary text
     /// - body: Optional body text
     /// - icon: Optional icon theme icon name or filename
-    pub fn new_notification
-        (&self,
-         summary: &str,
-         body: Option<&str>,
-         icon: Option<&str>)
-         -> Result<Notification, NotificationCreationError> {
-        let summary = try!(CString::new(summary));
+    pub fn new_notification(summary: &str,
+                            body: Option<&str>,
+                            icon: Option<&str>)
+                            -> Result<Notification> {
+        init_panic!();
+        let summary = CString::new(summary)?;
         let body = match body {
-            Some(body) => Some(try!(CString::new(body))),
+            Some(body) => Some(CString::new(body)?),
             None => None,
         };
         let body_ptr = match body {
@@ -178,7 +109,7 @@ impl Context {
             None => std::ptr::null(),
         };
         let icon = match icon {
-            Some(icon) => Some(try!(CString::new(icon))),
+            Some(icon) => Some(CString::new(icon)?),
             None => None,
         };
         let icon_ptr = match icon {
@@ -191,61 +122,26 @@ impl Context {
                                                  body_ptr,
                                                  icon_ptr);
             if n.is_null() {
-                return Err(NotificationCreationError::Unknown);
+                bail!(ErrorKind::UnknownError);
             }
 
-            Ok(Notification {
-                   handle: n,
-                   _phantom: PhantomData,
-               })
+            Ok(Notification { handle: n })
         }
     }
 
-    /// Show a notification.
-    ///
-    /// This is a convenience method that creates a new notification,
-    /// and shows it in one step.
-    pub fn show(&self,
-                summary: &str,
-                body: Option<&str>,
-                icon: Option<&str>)
-                -> Result<(), Box<Error>> {
-        let notif = try!(self.new_notification(summary, body, icon));
-        try!(notif.show());
-        Ok(())
-    }
-}
-
-impl Drop for Context {
-    fn drop(&mut self) {
-        unsafe {
-            sys::notify_uninit();
-        }
-    }
-}
-
-
-/// A passive pop-up notification
-pub struct Notification<'a> {
-    handle: *mut sys::NotifyNotification,
-    _phantom: PhantomData<&'a Context>,
-}
-
-impl<'a> Notification<'a> {
     /// Tells the notification server to display the notification
     /// on the screen.
-    pub fn show(&'a self) -> Result<(), NotificationShowError> {
+    pub fn show(&self) -> Result<()> {
+        init_panic!();
         unsafe {
             let mut err: *mut glib_sys::GError = std::ptr::null_mut();
             sys::notify_notification_show(self.handle, &mut err);
             if !err.is_null() {
-                let result = Err(NotificationShowError {
-                                     message: CStr::from_ptr((*err).message)
-                                         .to_string_lossy()
-                                         .into_owned(),
-                                 });
+                let msg = CStr::from_ptr((*err).message)
+                    .to_string_lossy()
+                    .into_owned();
                 glib_sys::g_error_free(err);
-                return result;
+                bail!(ErrorKind::NotificationShowError(msg));
             }
             Ok(())
         }
@@ -253,7 +149,8 @@ impl<'a> Notification<'a> {
 
     /// Set the notification timeout. Note that the server might ignore
     /// the timeout.
-    pub fn set_notification_timeout(&'a self, timeout: i32) {
+    pub fn set_notification_timeout(&self, timeout: i32) {
+        init_panic!();
         let _timeout: c_int = From::from(timeout);
 
         unsafe { sys::notify_notification_set_timeout(self.handle, _timeout) }
@@ -262,14 +159,15 @@ impl<'a> Notification<'a> {
     /// Updates the notification text and icon. This won't send the update
     /// out and display it on the screen. For that, you will need to
     /// call `.show()`.
-    pub fn update(&'a self,
+    pub fn update(&self,
                   summary: &str,
                   body: Option<&str>,
                   icon: Option<&str>)
-                  -> Result<(), NotificationCreationError> {
-        let summary = try!(CString::new(summary));
+                  -> Result<()> {
+        init_panic!();
+        let summary = CString::new(summary)?;
         let body = match body {
-            Some(body) => Some(try!(CString::new(body))),
+            Some(body) => Some(CString::new(body)?),
             None => None,
         };
         let body_ptr = match body {
@@ -277,7 +175,7 @@ impl<'a> Notification<'a> {
             None => std::ptr::null(),
         };
         let icon = match icon {
-            Some(icon) => Some(try!(CString::new(icon))),
+            Some(icon) => Some(CString::new(icon)?),
             None => None,
         };
         let icon_ptr = match icon {
@@ -291,7 +189,7 @@ impl<'a> Notification<'a> {
                                                     body_ptr,
                                                     icon_ptr);
             if b == FALSE {
-                return Err(NotificationCreationError::InvalidParameter);
+                bail!(ErrorKind::InvalidParameter);
             }
         }
 
@@ -300,11 +198,12 @@ impl<'a> Notification<'a> {
 
     /// Sets a hint for `key` with value `value`. If value is `None`,
     /// then key is unset.
-    pub fn set_hint(&'a self,
+    pub fn set_hint(&self,
                     key: &str,
                     value: Option<glib::variant::Variant>)
-                    -> Result<(), NotificationCreationError> {
-        let key = try!(CString::new(key));
+                    -> Result<()> {
+        init_panic!();
+        let key = CString::new(key)?;
 
         let gvalue: *mut glib_sys::GVariant = {
             match value {
@@ -322,38 +221,40 @@ impl<'a> Notification<'a> {
 
     /// Sets the category of this notification. This can be used by the
     /// notification server to filter or display the data in a certain way.
-    pub fn set_category(&'a self, category: &str) -> Result<(), NotificationCreationError> {
-        let category = try!(CString::new(category));
+    pub fn set_category(&self, category: &str) -> Result<()> {
+        init_panic!();
+        let category = CString::new(category)?;
         unsafe {
             sys::notify_notification_set_category(self.handle,
-                                                   category.as_ptr());
+                                                  category.as_ptr());
         }
 
         return Ok(());
     }
 
     /// Sets the urgency level of this notification.
-    pub fn set_urgency(&'a self, urgency: Urgency) {
+    pub fn set_urgency(&self, urgency: Urgency) {
+        init_panic!();
         let urgency: sys::NotifyUrgency = From::from(urgency);
 
         unsafe {
-            sys::notify_notification_set_urgency(self.handle,
-                                             urgency);
+            sys::notify_notification_set_urgency(self.handle, urgency);
         }
     }
 
     /// Sets the image in the notification from a Pixbuf.
-    pub fn set_image_from_pixbuf(&'a self, pixbuf: &gdk_pixbuf::Pixbuf) {
+    pub fn set_image_from_pixbuf(&self, pixbuf: &gdk_pixbuf::Pixbuf) {
+        init_panic!();
         let pixbuf: *mut GdkPixbuf = pixbuf.to_glib_none().0;
 
         unsafe {
-            sys::notify_notification_set_image_from_pixbuf(self.handle,
-                                                            pixbuf);
+            sys::notify_notification_set_image_from_pixbuf(self.handle, pixbuf);
         }
     }
 
     /// Clears all hints from the notification.
-    pub fn clear_hints(&'a self) {
+    pub fn clear_hints(&self) {
+        init_panic!();
         unsafe {
             sys::notify_notification_clear_hints(self.handle);
         }
@@ -361,20 +262,18 @@ impl<'a> Notification<'a> {
 
     /// Synchronously tells the notification server to hide the
     /// notification on the screen.
-    pub fn close(&'a self) -> Result<(), NotificationShowError> {
+    pub fn close(&self) -> Result<()> {
+        init_panic!();
         unsafe {
             let mut err: *mut glib_sys::GError = std::ptr::null_mut();
-            sys::notify_notification_close(self.handle,
-                                           &mut err);
+            sys::notify_notification_close(self.handle, &mut err);
 
             if !err.is_null() {
-                let result = Err(NotificationShowError {
-                                     message: CStr::from_ptr((*err).message)
-                                         .to_string_lossy()
-                                         .into_owned(),
-                                 });
+                let msg = CStr::from_ptr((*err).message)
+                    .to_string_lossy()
+                    .into_owned();
                 glib_sys::g_error_free(err);
-                return result;
+                bail!(ErrorKind::NotificationShowError(msg));
             }
         }
         return Ok(());
@@ -382,20 +281,68 @@ impl<'a> Notification<'a> {
 }
 
 
-/// An error that can happen when attempting to show a notification.
-#[derive(Debug)]
-pub struct NotificationShowError {
-    message: String,
+/// Initialized libnotify. This must be called before any other functions.
+pub fn init(app_name: &str) -> Result<()> {
+    let app_name = CString::new(app_name)?;
+
+    unsafe {
+        if sys::notify_is_initted() == TRUE {
+            bail!(ErrorKind::NotifyAlreadyInitialized);
+        }
+        let app_name = CString::new(app_name)?;
+        if sys::notify_init(app_name.as_ptr()) == FALSE {
+            bail!(ErrorKind::NotifyInitError);
+        }
+    }
+
+    return Ok(());
 }
 
-impl fmt::Display for NotificationShowError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Error showing notification: {}", self.message)
+
+/// Uninitialized libnotify.
+/// This should be called when the program no longer needs libnotify for
+/// the rest of its lifecycle, typically just before exitting.
+pub fn uninit() {
+    init_panic!();
+    unsafe {
+        sys::notify_uninit();
     }
 }
 
-impl Error for NotificationShowError {
-    fn description(&self) -> &str {
-        "notification show error"
+
+/// Gets whether or not libnotify is initialized.
+pub fn is_initted() -> bool {
+    unsafe {
+        if sys::notify_is_initted() == TRUE {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+}
+
+
+/// Sets the application name.
+pub fn set_app_name(app_name: &str) -> Result<()> {
+    init_panic!();
+    let app_name = CString::new(app_name)?;
+
+    unsafe {
+        sys::notify_set_app_name(app_name.as_ptr());
+    }
+
+    return Ok(());
+}
+
+
+/// Gets the application name registered.
+pub fn get_app_name() -> Result<String> {
+    init_panic!();
+    unsafe {
+        let c_name: *const c_char = sys::notify_get_app_name();
+        let c_str = CStr::from_ptr(c_name);
+        let string = c_str.to_str()?;
+        return Ok(String::from(string));
     }
 }

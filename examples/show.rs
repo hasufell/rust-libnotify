@@ -1,12 +1,18 @@
 extern crate libnotify;
 
 fn main() {
-    // Create a libnotify context
-    let notify = libnotify::Context::new("myapp").unwrap();
+    // Init libnotify
+    libnotify::init("myapp").unwrap();
     // Create a new notification and show it
-    let n = notify.new_notification("Summary", Some("Optional Body"), None)
-        .unwrap();
+    let n = libnotify::Notification::new_notification("Summary",
+                                                      Some("Optional Body"),
+                                                      None).unwrap();
+    // Show the notification
     n.show().unwrap();
     // You can also use the .show() convenience method on the context
-    notify.show("I am another notification", None, None).unwrap();
+    n.update("I am another notification", None, None).unwrap();
+    // Show the update notification
+    n.show().unwrap();
+    // We are done, deinit
+    libnotify::uninit();
 }
