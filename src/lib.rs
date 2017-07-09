@@ -19,11 +19,14 @@
 
 #![warn(missing_docs)]
 
+extern crate gdk_pixbuf;
+extern crate gdk_pixbuf_sys;
 extern crate glib;
 extern crate glib_sys;
 extern crate gtypes;
 extern crate libnotify_sys as sys;
 
+use gdk_pixbuf_sys::GdkPixbuf;
 use glib::translate::*;
 use gtypes::{TRUE, FALSE};
 use std::error::Error;
@@ -336,6 +339,16 @@ impl<'a> Notification<'a> {
         unsafe {
             sys::notify_notification_set_urgency(self.handle,
                                              urgency);
+        }
+    }
+
+    /// Sets the image in the notification from a Pixbuf.
+    pub fn set_image_from_pixbuf(&self, pixbuf: &gdk_pixbuf::Pixbuf) {
+        let pixbuf: *mut GdkPixbuf = pixbuf.to_glib_none().0;
+
+        unsafe {
+            sys::notify_notification_set_image_from_pixbuf(self.handle,
+                                                            pixbuf);
         }
     }
 }
