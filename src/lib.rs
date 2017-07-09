@@ -253,7 +253,7 @@ impl<'a> Notification<'a> {
 
     /// Set the notification timeout. Note that the server might ignore
     /// the timeout.
-    pub fn set_notification_timeout(&self, timeout: i32) {
+    pub fn set_notification_timeout(&'a self, timeout: i32) {
         let _timeout: c_int = From::from(timeout);
 
         unsafe { sys::notify_notification_set_timeout(self.handle, _timeout) }
@@ -262,7 +262,7 @@ impl<'a> Notification<'a> {
     /// Updates the notification text and icon. This won't send the update
     /// out and display it on the screen. For that, you will need to
     /// call `.show()`.
-    pub fn update(&self,
+    pub fn update(&'a self,
                   summary: &str,
                   body: Option<&str>,
                   icon: Option<&str>)
@@ -300,7 +300,7 @@ impl<'a> Notification<'a> {
 
     /// Sets a hint for `key` with value `value`. If value is `None`,
     /// then key is unset.
-    pub fn set_hint(&self,
+    pub fn set_hint(&'a self,
                     key: &str,
                     value: Option<glib::variant::Variant>)
                     -> Result<(), NotificationCreationError> {
@@ -322,7 +322,7 @@ impl<'a> Notification<'a> {
 
     /// Sets the category of this notification. This can be used by the
     /// notification server to filter or display the data in a certain way.
-    pub fn set_category(&self, category: &str) -> Result<(), NotificationCreationError> {
+    pub fn set_category(&'a self, category: &str) -> Result<(), NotificationCreationError> {
         let category = try!(CString::new(category));
         unsafe {
             sys::notify_notification_set_category(self.handle,
@@ -333,7 +333,7 @@ impl<'a> Notification<'a> {
     }
 
     /// Sets the urgency level of this notification.
-    pub fn set_urgency(&self, urgency: Urgency) {
+    pub fn set_urgency(&'a self, urgency: Urgency) {
         let urgency: sys::NotifyUrgency = From::from(urgency);
 
         unsafe {
@@ -343,7 +343,7 @@ impl<'a> Notification<'a> {
     }
 
     /// Sets the image in the notification from a Pixbuf.
-    pub fn set_image_from_pixbuf(&self, pixbuf: &gdk_pixbuf::Pixbuf) {
+    pub fn set_image_from_pixbuf(&'a self, pixbuf: &gdk_pixbuf::Pixbuf) {
         let pixbuf: *mut GdkPixbuf = pixbuf.to_glib_none().0;
 
         unsafe {
@@ -353,7 +353,7 @@ impl<'a> Notification<'a> {
     }
 
     /// Clears all hints from the notification.
-    pub fn clear_hints(&self) {
+    pub fn clear_hints(&'a self) {
         unsafe {
             sys::notify_notification_clear_hints(self.handle);
         }
@@ -361,7 +361,7 @@ impl<'a> Notification<'a> {
 
     /// Synchronously tells the notification server to hide the
     /// notification on the screen.
-    pub fn close(&self) -> Result<(), NotificationShowError> {
+    pub fn close(&'a self) -> Result<(), NotificationShowError> {
         unsafe {
             let mut err: *mut glib_sys::GError = std::ptr::null_mut();
             sys::notify_notification_close(self.handle,
