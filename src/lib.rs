@@ -26,6 +26,7 @@
 
 #[macro_use]
 extern crate error_chain;
+extern crate gobject_sys;
 extern crate gdk_pixbuf;
 extern crate gdk_pixbuf_sys;
 extern crate glib;
@@ -89,6 +90,23 @@ impl From<Urgency> for sys::NotifyUrgency {
 /// A passive pop-up notification
 pub struct Notification {
     handle: *mut sys::NotifyNotification,
+}
+
+impl Drop for Notification {
+    fn drop(&mut self) {
+        unsafe {
+            if gobject_sys::g_type_check_instance_is_a(
+                self.handle as *mut gobject_sys::GTypeInstance,
+                gobject_sys::G_TYPE_OBJECT,
+            ) == FALSE
+            {
+                panic!("Not a GObject!");
+            }
+            let gobject = self.handle as
+                *mut gobject_sys::GObject;
+            gobject_sys::g_object_unref(gobject);
+        }
+    }
 }
 
 impl Notification {
