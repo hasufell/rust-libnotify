@@ -31,7 +31,6 @@ extern crate gdk_pixbuf;
 extern crate gdk_pixbuf_sys;
 extern crate glib;
 extern crate glib_sys;
-extern crate gtypes;
 extern crate libnotify_sys as sys;
 
 pub mod errors;
@@ -39,7 +38,6 @@ pub mod errors;
 use errors::*;
 use gdk_pixbuf_sys::GdkPixbuf;
 use glib::translate::ToGlibPtr;
-use gtypes::{TRUE, FALSE};
 use std::ffi::{CStr, CString};
 use std::os::raw::c_int;
 use std::os::raw::c_char;
@@ -98,7 +96,7 @@ impl Drop for Notification {
             if gobject_sys::g_type_check_instance_is_a(
                 self.handle as *mut gobject_sys::GTypeInstance,
                 gobject_sys::G_TYPE_OBJECT,
-            ) == FALSE
+            ) == glib_sys::GFALSE
             {
                 panic!("Not a GObject!");
             }
@@ -211,7 +209,7 @@ impl Notification {
                                                     summary.as_ptr(),
                                                     body_ptr,
                                                     icon_ptr);
-            if b == FALSE {
+            if b == glib_sys::GFALSE {
                 bail!(ErrorKind::InvalidParameter);
             }
         }
@@ -309,11 +307,11 @@ pub fn init(app_name: &str) -> Result<()> {
     let app_name = CString::new(app_name)?;
 
     unsafe {
-        if sys::notify_is_initted() == TRUE {
+        if sys::notify_is_initted() == glib_sys::GTRUE {
             bail!(ErrorKind::NotifyAlreadyInitialized);
         }
         let app_name = CString::new(app_name)?;
-        if sys::notify_init(app_name.as_ptr()) == FALSE {
+        if sys::notify_init(app_name.as_ptr()) == glib_sys::GFALSE {
             bail!(ErrorKind::NotifyInitError);
         }
     }
@@ -336,7 +334,7 @@ pub fn uninit() {
 /// Gets whether or not libnotify is initialized.
 pub fn is_initted() -> bool {
     unsafe {
-        if sys::notify_is_initted() == TRUE {
+        if sys::notify_is_initted() == glib_sys::GTRUE {
             return true;
         } else {
             return false;
