@@ -1,0 +1,11 @@
+[options]
+work_mode = "sys"
+library = "Notify"
+version = "0.7"
+min_cfg_version = "0.7.6"
+external_libraries = [
+   "GLib",
+   "GObject",
+   "GdkPixbuf",
+]
+
