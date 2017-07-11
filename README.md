@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/hasufell/rust-libnotify.svg)](https://github.com/hasufell/rust-libnotify)
 
 
-# libnotify-rs
+# rust-libnotify
 Rust binding to libnotify.
 
 * [Documentation (master)](https://hasufell.github.io/rust-libnotify/)
