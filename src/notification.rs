@@ -213,7 +213,6 @@ impl Notification {
     ///
     /// # Returns
     ///
-    /// `true`, unless an invalid parameter was passed.
     /// `Ok(())` on success, or `Err(str)` if an invalid parameter was passed
     // TODO: switch back to BoolError when it hits stable glib
     pub fn update<
