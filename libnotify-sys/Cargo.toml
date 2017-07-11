@@ -18,8 +18,13 @@ version = "^0.3.4"
 name = "libnotify_sys"
 
 [package]
+authors = ["Mika Attila <radiantstatue@gmail.com>", "Julian Ospald <hasufell@posteo.de>"]
 build = "build.rs"
+description = "FFI bindings to libnotify"
+keywords = ["libnotify", "notification"]
+license = "MIT"
 links = "libnotify"
 name = "libnotify-sys"
+readme = "README.md"
+repository = "https://github.com/hasufell/rust-libnotify"
 version = "1.0.0"
-

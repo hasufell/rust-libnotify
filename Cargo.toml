@@ -5,8 +5,8 @@ authors = ["Mika Attila <radiantstatue@gmail.com>", "Julian Ospald <hasufell@pos
 license = "MIT"
 description = "Rust bindings to libnotify"
 readme = "README.md"
-repository = "https://github.com/crumblingstatue/rust-libnotify"
-documentation = "http://crumblingstatue.github.io/doc/libnotify/libnotify/"
+repository = "https://github.com/hasufell/rust-libnotify"
+documentation = "https://hasufell.github.io/rust-libnotify/libnotify/"
 keywords = ["libnotify", "notification"]
 
 [dependencies]
