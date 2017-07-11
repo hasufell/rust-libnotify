@@ -6,7 +6,7 @@
 //! fn main() {
 //!     // Init libnotify
 //!     libnotify::init("myapp").unwrap();
-//!     // Create a new notification and show it
+//!     // Create a new notification (doesn't show it yet)
 //!     let n = libnotify::Notification::new("Summary",
 //!                                          Some("Optional Body"),
 //!                                          None);
