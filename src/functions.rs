@@ -11,9 +11,7 @@ use std::ptr;
 ///
 /// `true` if libnotify is initialized, or `false` otherwise.
 pub fn is_initted() -> bool {
-    unsafe {
-        from_glib(ffi::notify_is_initted())
-    }
+    unsafe { from_glib(ffi::notify_is_initted()) }
 }
 
 /// Initialized libnotify. This must be called before any other functions.
@@ -23,7 +21,10 @@ pub fn is_initted() -> bool {
 /// `Ok(())` if successful, `Err(err)` on error.
 pub fn init(app_name: &str) -> Result<(), glib::error::BoolError> {
     unsafe {
-        glib::error::BoolError::from_glib(ffi::notify_init(app_name.to_glib_none().0), "Failed to initialize libnotify")
+        glib::error::BoolError::from_glib(
+            ffi::notify_init(app_name.to_glib_none().0),
+            "Failed to initialize libnotify",
+        )
     }
 }
 
@@ -34,9 +35,7 @@ pub fn init(app_name: &str) -> Result<(), glib::error::BoolError> {
 /// The registered application name, passed to `init()`.
 pub fn get_app_name() -> Option<String> {
     assert_initialized_libnotify!();
-    unsafe {
-        from_glib_none(ffi::notify_get_app_name())
-    }
+    unsafe { from_glib_none(ffi::notify_get_app_name()) }
 }
 
 /// Synchronously queries the server for its capabilities and returns them as
@@ -67,8 +66,22 @@ pub fn get_server_info() -> Option<(String, String, String, String)> {
         let mut ret_vendor = ptr::null_mut();
         let mut ret_version = ptr::null_mut();
         let mut ret_spec_version = ptr::null_mut();
-        let ret = from_glib(ffi::notify_get_server_info(&mut ret_name, &mut ret_vendor, &mut ret_version, &mut ret_spec_version));
-        if ret { Some((from_glib_full(ret_name), from_glib_full(ret_vendor), from_glib_full(ret_version), from_glib_full(ret_spec_version))) } else { None }
+        let ret = from_glib(ffi::notify_get_server_info(
+            &mut ret_name,
+            &mut ret_vendor,
+            &mut ret_version,
+            &mut ret_spec_version,
+        ));
+        if ret {
+            Some((
+                from_glib_full(ret_name),
+                from_glib_full(ret_vendor),
+                from_glib_full(ret_version),
+                from_glib_full(ret_spec_version),
+            ))
+        } else {
+            None
+        }
     }
 }
 
@@ -92,4 +105,3 @@ pub fn uninit() {
         ffi::notify_uninit();
     }
 }
-

@@ -36,14 +36,22 @@ impl Notification {
     /// # Returns
     ///
     /// The new `Notification`.
-    pub fn new<'a, 'b, P: Into<Option<&'a str>>, Q: Into<Option<&'b str>>>(summary: &str, body: P, icon: Q) -> Notification {
+    pub fn new<'a, 'b, P: Into<Option<&'a str>>, Q: Into<Option<&'b str>>>(
+        summary: &str,
+        body: P,
+        icon: Q,
+    ) -> Notification {
         assert_initialized_libnotify!();
         let body = body.into();
         let body = body.to_glib_none();
         let icon = icon.into();
         let icon = icon.to_glib_none();
         unsafe {
-            from_glib_full(ffi::notify_notification_new(summary.to_glib_none().0, body.0, icon.0))
+            from_glib_full(ffi::notify_notification_new(
+                summary.to_glib_none().0,
+                body.0,
+                icon.0,
+            ))
         }
     }
 
@@ -93,9 +101,7 @@ impl Notification {
     /// ## `key`
     /// the hint key
     /// ## `value`
-    pub fn set_hint(&self,
-                key: &str,
-                value: Option<glib::variant::Variant>) {
+    pub fn set_hint(&self, key: &str, value: Option<glib::variant::Variant>) {
         assert_initialized_libnotify!();
 
         let gvalue: *mut glib_ffi::GVariant = {
@@ -106,9 +112,11 @@ impl Notification {
         };
 
         unsafe {
-            ffi::notify_notification_set_hint(self.to_glib_none().0,
+            ffi::notify_notification_set_hint(
+                self.to_glib_none().0,
                 key.to_glib_none().0,
-                gvalue)
+                gvalue,
+            )
         }
     }
 
@@ -119,8 +127,10 @@ impl Notification {
         assert_initialized_libnotify!();
 
         unsafe {
-            ffi::notify_notification_set_image_from_pixbuf(self.to_glib_none().0,
-            pixbuf.to_glib_none().0);
+            ffi::notify_notification_set_image_from_pixbuf(
+                self.to_glib_none().0,
+                pixbuf.to_glib_none().0,
+            );
         }
     }
 
@@ -141,7 +151,10 @@ impl Notification {
         let app_name = app_name.into();
         let app_name = app_name.to_glib_none();
         unsafe {
-            ffi::notify_notification_set_app_name(self.to_glib_none().0, app_name.0);
+            ffi::notify_notification_set_app_name(
+                self.to_glib_none().0,
+                app_name.0,
+            );
         }
     }
 
@@ -151,7 +164,10 @@ impl Notification {
     /// The category.
     pub fn set_category(&self, category: &str) {
         unsafe {
-            ffi::notify_notification_set_category(self.to_glib_none().0, category.to_glib_none().0);
+            ffi::notify_notification_set_category(
+                self.to_glib_none().0,
+                category.to_glib_none().0,
+            );
         }
     }
 
@@ -164,7 +180,10 @@ impl Notification {
     /// The timeout in milliseconds.
     pub fn set_timeout(&self, timeout: i32) {
         unsafe {
-            ffi::notify_notification_set_timeout(self.to_glib_none().0, timeout);
+            ffi::notify_notification_set_timeout(
+                self.to_glib_none().0,
+                timeout,
+            );
         }
     }
 
@@ -175,7 +194,10 @@ impl Notification {
     /// The urgency level.
     pub fn set_urgency(&self, urgency: Urgency) {
         unsafe {
-            ffi::notify_notification_set_urgency(self.to_glib_none().0, urgency.to_glib());
+            ffi::notify_notification_set_urgency(
+                self.to_glib_none().0,
+                urgency.to_glib(),
+            );
         }
     }
 
@@ -193,13 +215,31 @@ impl Notification {
     ///
     /// `true`, unless an invalid parameter was passed.
     /// `Ok(())` on success, or `Err(err)` if an invalid parameter was passed
-    pub fn update<'a, 'b, P: Into<Option<&'a str>>, Q: Into<Option<&'b str>>>(&self, summary: &str, body: P, icon: Q) -> Result<(), glib::error::BoolError> {
+    pub fn update<
+        'a,
+        'b,
+        P: Into<Option<&'a str>>,
+        Q: Into<Option<&'b str>>,
+    >(
+        &self,
+        summary: &str,
+        body: P,
+        icon: Q,
+    ) -> Result<(), glib::error::BoolError> {
         let body = body.into();
         let body = body.to_glib_none();
         let icon = icon.into();
         let icon = icon.to_glib_none();
         unsafe {
-            glib::error::BoolError::from_glib(ffi::notify_notification_update(self.to_glib_none().0, summary.to_glib_none().0, body.0, icon.0), "Invalid parameter passed")
+            glib::error::BoolError::from_glib(
+                ffi::notify_notification_update(
+                    self.to_glib_none().0,
+                    summary.to_glib_none().0,
+                    body.0,
+                    icon.0,
+                ),
+                "Invalid parameter passed",
+            )
         }
     }
 }

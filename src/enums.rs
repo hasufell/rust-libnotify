@@ -27,7 +27,7 @@ impl ToGlib for Urgency {
             Urgency::Low => ffi::NOTIFY_URGENCY_LOW,
             Urgency::Normal => ffi::NOTIFY_URGENCY_NORMAL,
             Urgency::Critical => ffi::NOTIFY_URGENCY_CRITICAL,
-            Urgency::__Unknown(value) => unsafe{std::mem::transmute(value)}
+            Urgency::__Unknown(value) => unsafe { std::mem::transmute(value) },
         }
     }
 }
@@ -43,4 +43,3 @@ impl FromGlib<ffi::NotifyUrgency> for Urgency {
         }
     }
 }
-
