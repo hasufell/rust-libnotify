@@ -214,7 +214,8 @@ impl Notification {
     /// # Returns
     ///
     /// `true`, unless an invalid parameter was passed.
-    /// `Ok(())` on success, or `Err(err)` if an invalid parameter was passed
+    /// `Ok(())` on success, or `Err(str)` if an invalid parameter was passed
+    // TODO: switch back to BoolError when it hits stable glib
     pub fn update<
         'a,
         'b,
@@ -225,21 +226,24 @@ impl Notification {
         summary: &str,
         body: P,
         icon: Q,
-    ) -> Result<(), glib::error::BoolError> {
+    ) -> Result<(), String> {
         let body = body.into();
         let body = body.to_glib_none();
         let icon = icon.into();
         let icon = icon.to_glib_none();
         unsafe {
-            glib::error::BoolError::from_glib(
-                ffi::notify_notification_update(
-                    self.to_glib_none().0,
-                    summary.to_glib_none().0,
-                    body.0,
-                    icon.0,
+            let b = ffi::notify_notification_update(
+                self.to_glib_none().0,
+                summary.to_glib_none().0,
+                body.0,
+                icon.0,
+            );
+            match b {
+                glib_ffi::GFALSE => Err(
+                    String::from("Invalid parameter passed"),
                 ),
-                "Invalid parameter passed",
-            )
+                _ => Ok(()),
+            }
         }
     }
 }

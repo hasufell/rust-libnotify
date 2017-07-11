@@ -1,6 +1,6 @@
 use ffi;
 use glib::translate::*;
-use glib;
+use glib_ffi;
 use std::ptr;
 
 
@@ -18,13 +18,18 @@ pub fn is_initted() -> bool {
 ///
 /// # Returns
 ///
-/// `Ok(())` if successful, `Err(err)` on error.
-pub fn init(app_name: &str) -> Result<(), glib::error::BoolError> {
+/// `Ok(())` if successful, `Err(str)` on error.
+// TODO: switch back to BoolError when it hits stable glib
+pub fn init(app_name: &str) -> Result<(), String> {
     unsafe {
-        glib::error::BoolError::from_glib(
-            ffi::notify_init(app_name.to_glib_none().0),
-            "Failed to initialize libnotify",
-        )
+        let b = ffi::notify_init(app_name.to_glib_none().0);
+
+        match b {
+            glib_ffi::GFALSE => Err(
+                String::from("Failed to initialize libnotify"),
+            ),
+            _ => Ok(()),
+        }
     }
 }
 
