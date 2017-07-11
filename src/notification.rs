@@ -51,7 +51,7 @@ impl Notification {
     ///
     /// # Returns
     ///
-    /// `true` on success, or `false` on error with `error` filled in
+    /// `Ok(())` on success, or `Err(err)` on error
     pub fn close(&self) -> Result<(), glib::error::Error> {
         assert_initialized_libnotify!();
         unsafe {
@@ -70,8 +70,7 @@ impl Notification {
     ///
     /// # Returns
     ///
-    /// `true` if successful. On error, this will return `false` and set
-    ///  `error`.
+    /// `Ok(())` on success, or `Err(err)` on error
     // TODO: test if Error leaks memory
     pub fn show(&self) -> Result<(), glib::error::Error> {
         assert_initialized_libnotify!();
@@ -193,6 +192,7 @@ impl Notification {
     /// # Returns
     ///
     /// `true`, unless an invalid parameter was passed.
+    /// `Ok(())` on success, or `Err(err)` if an invalid parameter was passed
     pub fn update<'a, 'b, P: Into<Option<&'a str>>, Q: Into<Option<&'b str>>>(&self, summary: &str, body: P, icon: Q) -> Result<(), glib::error::BoolError> {
         let body = body.into();
         let body = body.to_glib_none();
