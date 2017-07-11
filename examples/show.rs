@@ -8,9 +8,9 @@ fn main() {
         libnotify::Notification::new("Summary", Some("Optional Body"), None);
     // Show the notification
     n.show().unwrap();
-    // You can also use the .show() convenience method on the context
+    // Update the existent notification
     n.update("I am another notification", None, None).unwrap();
-    // Show the update notification
+    // Show the updated notification
     n.show().unwrap();
     // We are done, deinit
     libnotify::uninit();
