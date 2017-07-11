@@ -1,0 +1,69 @@
+[options]
+girs_dir = "gir-files"
+library = "Notify"
+version = "0.7"
+min_cfg_version = "0.7.7"
+target_path = "."
+work_mode = "normal"
+generate_safety_asserts = true
+deprecate_by_min_version = true
+
+generate = [
+	"Notify.Urgency",
+]
+
+
+
+[[object]]
+name = "Notify.Notification"
+status = "generate"
+	[[object.function]]
+	name = "get_closed_reason"
+	ignore = true
+	[[object.function]]
+	name = "add_action"
+	ignore = true
+	[[object.function]]
+	name = "clear_actions"
+	ignore = true
+	[[object.function]]
+	name = "close"
+	# manual
+	ignore = true
+	[[object.function]]
+	name = "set_hint"
+	# manual
+	ignore = true
+	[[object.function]]
+	name = "set_icon_from_pixbuf"
+	# deprecated
+	ignore = true
+	[[object.function]]
+	name = "set_image_from_pixbuf"
+	# manual
+	ignore = true
+	[[object.function]]
+	name = "show"
+	# manual
+	ignore = true
+	[[object.function]]
+	name = "update"
+		[object.function.return]
+		bool_return_is_error = "Invalid parameter passed"
+	[[object.function]]
+	name = "set_app_name"
+		[[object.function.parameter]]
+		name = "app_name"
+		nullable = true
+
+[[object]]
+name = "Notify.*"
+status = "generate"
+	[[object.function]]
+	name = "is_initted"
+	# manual assert_initialized_main_thread
+	ignore = true
+	[[object.function]]
+	name = "init"
+	# manual assert_initialized_main_thread
+	ignore = true
