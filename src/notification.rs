@@ -4,6 +4,7 @@ use gdk_pixbuf;
 use glib::translate::*;
 use glib;
 use glib_ffi;
+use gobject_ffi;
 use std;
 
 
