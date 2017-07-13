@@ -1,5 +1,5 @@
 [![Latest Version](https://img.shields.io/crates/v/libnotify.svg)](https://crates.io/crates/libnotify)
-[![License](https://img.shields.io/github/license/hasufell/rust-libnotify.svg)](https://github.com/hasufell/rust-libnotify)
+[![License](https://img.shields.io/github/license/hasufell/rust-libnotify.svg)](LICENSE)
 [![Crate download count](https://img.shields.io/crates/d/libnotify.svg)](https://crates.io/crates/libnotify)
 
 [![Documentation (crates.io)](https://img.shields.io/badge/documentation-docs.rs-df3600.svg)](https://docs.rs/libnotify)
