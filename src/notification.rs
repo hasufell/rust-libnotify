@@ -5,6 +5,8 @@ use glib::translate::*;
 use glib;
 use glib_ffi;
 use gobject_ffi;
+use std::mem;
+use std::ptr;
 use std;
 
 
