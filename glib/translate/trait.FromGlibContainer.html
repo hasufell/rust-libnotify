@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `FromGlibContainer` trait in crate `glib`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, FromGlibContainer">
+
+    <title>glib::translate::FromGlibContainer - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc trait">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Trait FromGlibContainer</p><div class="block items"><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.from_glib_none_num">from_glib_none_num</a><a href="#tymethod.from_glib_container_num">from_glib_container_num</a><a href="#tymethod.from_glib_full_num">from_glib_full_num</a></div><a class="sidebar-title" href="#foreign-impls">Implementations on Foreign Types</a><div class="sidebar-links"><a href="#impl-FromGlibContainer%3CP%2C%20PP%3E">Vec&lt;T&gt;</a><a href="#impl-FromGlibContainer%3C*const%20c_char%2C%20*mut%20GHashTable%3E">HashMap&lt;String, String&gt;</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>glib</a>::<wbr><a href='index.html'>translate</a></p><script>window.sidebarCurrent = {name: 'FromGlibContainer', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>glib</a>::<wbr><a href='index.html'>translate</a>::<wbr><a class="trait" href=''>FromGlibContainer</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/glib/translate.rs.html#926-941' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait FromGlibContainer&lt;T, P:&nbsp;<a class="trait" href="../../glib/translate/trait.Ptr.html" title="trait glib::translate::Ptr">Ptr</a>&gt;: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a> {
+    unsafe fn <a href='#tymethod.from_glib_none_num' class='fnname'>from_glib_none_num</a>(ptr: P, num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self;
+<div class='item-spacer'></div>    unsafe fn <a href='#tymethod.from_glib_container_num' class='fnname'>from_glib_container_num</a>(ptr: P, num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self;
+<div class='item-spacer'></div>    unsafe fn <a href='#tymethod.from_glib_full_num' class='fnname'>from_glib_full_num</a>(ptr: P, num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self;
+}</pre><div class='docblock'><p>Translate from a container.</p>
+</div>
+            <h2 id='required-methods' class='small-section-header'>
+              Required Methods<a href='#required-methods' class='anchor'></a>
+            </h2>
+            <div class='methods'>
+        <h3 id='tymethod.from_glib_none_num' class='method'><span id='from_glib_none_num.v' class='invisible'><code>unsafe fn <a href='#tymethod.from_glib_none_num' class='fnname'>from_glib_none_num</a>(ptr: P, num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self</code></span></h3><div class='docblock'><p>Transfer: none.</p>
+
+<p><code>num</code> is the advised number of elements.</p>
+</div><h3 id='tymethod.from_glib_container_num' class='method'><span id='from_glib_container_num.v' class='invisible'><code>unsafe fn <a href='#tymethod.from_glib_container_num' class='fnname'>from_glib_container_num</a>(ptr: P, num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self</code></span></h3><div class='docblock'><p>Transfer: container.</p>
+
+<p><code>num</code> is the advised number of elements.</p>
+</div><h3 id='tymethod.from_glib_full_num' class='method'><span id='from_glib_full_num.v' class='invisible'><code>unsafe fn <a href='#tymethod.from_glib_full_num' class='fnname'>from_glib_full_num</a>(ptr: P, num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self</code></span></h3><div class='docblock'><p>Transfer: full.</p>
+
+<p><code>num</code> is the advised number of elements.</p>
+</div></div>
+                <h2 id='foreign-impls' class='small-section-header'>
+                  Implementations on Foreign Types<a href='#foreign-impls' class='anchor'></a>
+                </h2>
+            <h3 id='impl-FromGlibContainer%3CP%2C%20PP%3E' class='impl'><span class='in-band'><code>impl&lt;P, PP:&nbsp;<a class="trait" href="../../glib/translate/trait.Ptr.html" title="trait glib::translate::Ptr">Ptr</a>, T:&nbsp;<a class="trait" href="../../glib/translate/trait.FromGlibContainerAsVec.html" title="trait glib::translate::FromGlibContainerAsVec">FromGlibContainerAsVec</a>&lt;P, PP&gt;&gt; <a class="trait" href="../../glib/translate/trait.FromGlibContainer.html" title="trait glib::translate::FromGlibContainer">FromGlibContainer</a>&lt;P, PP&gt; for <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;T&gt;</code><a href='#impl-FromGlibContainer%3CP%2C%20PP%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/glib/translate.rs.html#1122-1134' title='goto source code'>[src]</a></span></h3>
+<span class='docblock autohide'><div class='impl-items'><h4 id='method.from_glib_none_num' class="method"><span id='from_glib_none_num.v-1' class='invisible'><code>unsafe fn <a href='#method.from_glib_none_num' class='fnname'>from_glib_none_num</a>(ptr: PP, num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/glib/translate.rs.html#1123-1125' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.from_glib_container_num' class="method"><span id='from_glib_container_num.v-1' class='invisible'><code>unsafe fn <a href='#method.from_glib_container_num' class='fnname'>from_glib_container_num</a>(ptr: PP, num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/glib/translate.rs.html#1127-1129' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.from_glib_full_num' class="method"><span id='from_glib_full_num.v-1' class='invisible'><code>unsafe fn <a href='#method.from_glib_full_num' class='fnname'>from_glib_full_num</a>(ptr: PP, num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/glib/translate.rs.html#1131-1133' title='goto source code'>[src]</a></span></h4>
+</div></span><h3 id='impl-FromGlibContainer%3C*const%20c_char%2C%20*mut%20GHashTable%3E' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../glib/translate/trait.FromGlibContainer.html" title="trait glib::translate::FromGlibContainer">FromGlibContainer</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const </a><a class="type" href="../../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html" title="type libc::unix::notbsd::linux::other::b64::x86_64::c_char">c_char</a>, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../../glib_sys/struct.GHashTable.html" title="struct glib_sys::GHashTable">GHashTable</a>&gt; for <a class="struct" href="https://doc.rust-lang.org/nightly/std/collections/hash/map/struct.HashMap.html" title="struct std::collections::hash::map::HashMap">HashMap</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;</code><a href='#impl-FromGlibContainer%3C*const%20c_char%2C%20*mut%20GHashTable%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/glib/translate.rs.html#1350-1362' title='goto source code'>[src]</a></span></h3>
+<span class='docblock autohide'><div class='impl-items'><h4 id='method.from_glib_none_num-1' class="method"><span id='from_glib_none_num.v-2' class='invisible'><code>unsafe fn <a href='#method.from_glib_none_num' class='fnname'>from_glib_none_num</a>(ptr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../../glib_sys/struct.GHashTable.html" title="struct glib_sys::GHashTable">GHashTable</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/glib/translate.rs.html#1351-1353' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.from_glib_container_num-1' class="method"><span id='from_glib_container_num.v-2' class='invisible'><code>unsafe fn <a href='#method.from_glib_container_num' class='fnname'>from_glib_container_num</a>(ptr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../../glib_sys/struct.GHashTable.html" title="struct glib_sys::GHashTable">GHashTable</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/glib/translate.rs.html#1355-1357' title='goto source code'>[src]</a></span></h4>
+<h4 id='method.from_glib_full_num-1' class="method"><span id='from_glib_full_num.v-2' class='invisible'><code>unsafe fn <a href='#method.from_glib_full_num' class='fnname'>from_glib_full_num</a>(ptr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="struct" href="../../glib_sys/struct.GHashTable.html" title="struct glib_sys::GHashTable">GHashTable</a>, _: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/glib/translate.rs.html#1359-1361' title='goto source code'>[src]</a></span></h4>
+</div></span>
+        <h2 id='implementors' class='small-section-header'>
+          Implementors<a href='#implementors' class='anchor'></a>
+        </h2>
+        <ul class='item-list' id='implementors-list'>
+    </ul><script type="text/javascript" async
+                         src="../../implementors/glib/translate/trait.FromGlibContainer.js">
+                 </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>↑</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>↓</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt style="width:31px;">+ / -</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "glib";
+    </script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

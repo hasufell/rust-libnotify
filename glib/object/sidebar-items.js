@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Object","The base class in the object hierarchy."],["WeakRef",""]],"trait":[["Cast","Upcasting and downcasting support."],["Downcast","Downcasts support."],["IsA","Declares the \"is a\" relationship."],["ObjectExt",""]]});

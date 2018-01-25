@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `GUnicodeScript` enum in crate `glib_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, GUnicodeScript">
+
+    <title>glib_sys::GUnicodeScript - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc enum">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Enum GUnicodeScript</p><div class="block items"><a class="sidebar-title" href="#variants">Variants</a><div class="sidebar-links"><a href="#variant.InvalidCode">InvalidCode</a><a href="#variant.Common">Common</a><a href="#variant.Inherited">Inherited</a><a href="#variant.Arabic">Arabic</a><a href="#variant.Armenian">Armenian</a><a href="#variant.Bengali">Bengali</a><a href="#variant.Bopomofo">Bopomofo</a><a href="#variant.Cherokee">Cherokee</a><a href="#variant.Coptic">Coptic</a><a href="#variant.Cyrillic">Cyrillic</a><a href="#variant.Deseret">Deseret</a><a href="#variant.Devanagari">Devanagari</a><a href="#variant.Ethiopic">Ethiopic</a><a href="#variant.Georgian">Georgian</a><a href="#variant.Gothic">Gothic</a><a href="#variant.Greek">Greek</a><a href="#variant.Gujarati">Gujarati</a><a href="#variant.Gurmukhi">Gurmukhi</a><a href="#variant.Han">Han</a><a href="#variant.Hangul">Hangul</a><a href="#variant.Hebrew">Hebrew</a><a href="#variant.Hiragana">Hiragana</a><a href="#variant.Kannada">Kannada</a><a href="#variant.Katakana">Katakana</a><a href="#variant.Khmer">Khmer</a><a href="#variant.Lao">Lao</a><a href="#variant.Latin">Latin</a><a href="#variant.Malayalam">Malayalam</a><a href="#variant.Mongolian">Mongolian</a><a href="#variant.Myanmar">Myanmar</a><a href="#variant.Ogham">Ogham</a><a href="#variant.OldItalic">OldItalic</a><a href="#variant.Oriya">Oriya</a><a href="#variant.Runic">Runic</a><a href="#variant.Sinhala">Sinhala</a><a href="#variant.Syriac">Syriac</a><a href="#variant.Tamil">Tamil</a><a href="#variant.Telugu">Telugu</a><a href="#variant.Thaana">Thaana</a><a href="#variant.Thai">Thai</a><a href="#variant.Tibetan">Tibetan</a><a href="#variant.CanadianAboriginal">CanadianAboriginal</a><a href="#variant.Yi">Yi</a><a href="#variant.Tagalog">Tagalog</a><a href="#variant.Hanunoo">Hanunoo</a><a href="#variant.Buhid">Buhid</a><a href="#variant.Tagbanwa">Tagbanwa</a><a href="#variant.Braille">Braille</a><a href="#variant.Cypriot">Cypriot</a><a href="#variant.Limbu">Limbu</a><a href="#variant.Osmanya">Osmanya</a><a href="#variant.Shavian">Shavian</a><a href="#variant.LinearB">LinearB</a><a href="#variant.TaiLe">TaiLe</a><a href="#variant.Ugaritic">Ugaritic</a><a href="#variant.NewTaiLue">NewTaiLue</a><a href="#variant.Buginese">Buginese</a><a href="#variant.Glagolitic">Glagolitic</a><a href="#variant.Tifinagh">Tifinagh</a><a href="#variant.SylotiNagri">SylotiNagri</a><a href="#variant.OldPersian">OldPersian</a><a href="#variant.Kharoshthi">Kharoshthi</a><a href="#variant.Unknown">Unknown</a><a href="#variant.Balinese">Balinese</a><a href="#variant.Cuneiform">Cuneiform</a><a href="#variant.Phoenician">Phoenician</a><a href="#variant.PhagsPa">PhagsPa</a><a href="#variant.Nko">Nko</a><a href="#variant.KayahLi">KayahLi</a><a href="#variant.Lepcha">Lepcha</a><a href="#variant.Rejang">Rejang</a><a href="#variant.Sundanese">Sundanese</a><a href="#variant.Saurashtra">Saurashtra</a><a href="#variant.Cham">Cham</a><a href="#variant.OlChiki">OlChiki</a><a href="#variant.Vai">Vai</a><a href="#variant.Carian">Carian</a><a href="#variant.Lycian">Lycian</a><a href="#variant.Lydian">Lydian</a><a href="#variant.Avestan">Avestan</a><a href="#variant.Bamum">Bamum</a><a href="#variant.EgyptianHieroglyphs">EgyptianHieroglyphs</a><a href="#variant.ImperialAramaic">ImperialAramaic</a><a href="#variant.InscriptionalPahlavi">InscriptionalPahlavi</a><a href="#variant.InscriptionalParthian">InscriptionalParthian</a><a href="#variant.Javanese">Javanese</a><a href="#variant.Kaithi">Kaithi</a><a href="#variant.Lisu">Lisu</a><a href="#variant.MeeteiMayek">MeeteiMayek</a><a href="#variant.OldSouthArabian">OldSouthArabian</a><a href="#variant.OldTurkic">OldTurkic</a><a href="#variant.Samaritan">Samaritan</a><a href="#variant.TaiTham">TaiTham</a><a href="#variant.TaiViet">TaiViet</a><a href="#variant.Batak">Batak</a><a href="#variant.Brahmi">Brahmi</a><a href="#variant.Mandaic">Mandaic</a><a href="#variant.Chakma">Chakma</a><a href="#variant.MeroiticCursive">MeroiticCursive</a><a href="#variant.MeroiticHieroglyphs">MeroiticHieroglyphs</a><a href="#variant.Miao">Miao</a><a href="#variant.Sharada">Sharada</a><a href="#variant.SoraSompeng">SoraSompeng</a><a href="#variant.Takri">Takri</a><a href="#variant.BassaVah">BassaVah</a><a href="#variant.CaucasianAlbanian">CaucasianAlbanian</a><a href="#variant.Duployan">Duployan</a><a href="#variant.Elbasan">Elbasan</a><a href="#variant.Grantha">Grantha</a><a href="#variant.Khojki">Khojki</a><a href="#variant.Khudawadi">Khudawadi</a><a href="#variant.LinearA">LinearA</a><a href="#variant.Mahajani">Mahajani</a><a href="#variant.Manichaean">Manichaean</a><a href="#variant.MendeKikakui">MendeKikakui</a><a href="#variant.Modi">Modi</a><a href="#variant.Mro">Mro</a><a href="#variant.Nabataean">Nabataean</a><a href="#variant.OldNorthArabian">OldNorthArabian</a><a href="#variant.OldPermic">OldPermic</a><a href="#variant.PahawhHmong">PahawhHmong</a><a href="#variant.Palmyrene">Palmyrene</a><a href="#variant.PauCinHau">PauCinHau</a><a href="#variant.PsalterPahlavi">PsalterPahlavi</a><a href="#variant.Siddham">Siddham</a><a href="#variant.Tirhuta">Tirhuta</a><a href="#variant.WarangCiti">WarangCiti</a><a href="#variant.Ahom">Ahom</a><a href="#variant.AnatolianHieroglyphs">AnatolianHieroglyphs</a><a href="#variant.Hatran">Hatran</a><a href="#variant.Multani">Multani</a><a href="#variant.OldHungarian">OldHungarian</a><a href="#variant.Signwriting">Signwriting</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Clone">Clone</a><a href="#impl-Copy">Copy</a><a href="#impl-Debug">Debug</a><a href="#impl-Eq">Eq</a><a href="#impl-PartialEq">PartialEq</a></div></div><p class='location'><a href='index.html'>glib_sys</a></p><script>window.sidebarCurrent = {name: 'GUnicodeScript', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>glib_sys</a>::<wbr><a class="enum" href=''>GUnicodeScript</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/glib_sys/lib.rs.html#793-927' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'><div class="docblock attributes">#[repr(C)]
+</div>pub enum GUnicodeScript {
+    InvalidCode,
+    Common,
+    Inherited,
+    Arabic,
+    Armenian,
+    Bengali,
+    Bopomofo,
+    Cherokee,
+    Coptic,
+    Cyrillic,
+    Deseret,
+    Devanagari,
+    Ethiopic,
+    Georgian,
+    Gothic,
+    Greek,
+    Gujarati,
+    Gurmukhi,
+    Han,
+    Hangul,
+    Hebrew,
+    Hiragana,
+    Kannada,
+    Katakana,
+    Khmer,
+    Lao,
+    Latin,
+    Malayalam,
+    Mongolian,
+    Myanmar,
+    Ogham,
+    OldItalic,
+    Oriya,
+    Runic,
+    Sinhala,
+    Syriac,
+    Tamil,
+    Telugu,
+    Thaana,
+    Thai,
+    Tibetan,
+    CanadianAboriginal,
+    Yi,
+    Tagalog,
+    Hanunoo,
+    Buhid,
+    Tagbanwa,
+    Braille,
+    Cypriot,
+    Limbu,
+    Osmanya,
+    Shavian,
+    LinearB,
+    TaiLe,
+    Ugaritic,
+    NewTaiLue,
+    Buginese,
+    Glagolitic,
+    Tifinagh,
+    SylotiNagri,
+    OldPersian,
+    Kharoshthi,
+    Unknown,
+    Balinese,
+    Cuneiform,
+    Phoenician,
+    PhagsPa,
+    Nko,
+    KayahLi,
+    Lepcha,
+    Rejang,
+    Sundanese,
+    Saurashtra,
+    Cham,
+    OlChiki,
+    Vai,
+    Carian,
+    Lycian,
+    Lydian,
+    Avestan,
+    Bamum,
+    EgyptianHieroglyphs,
+    ImperialAramaic,
+    InscriptionalPahlavi,
+    InscriptionalParthian,
+    Javanese,
+    Kaithi,
+    Lisu,
+    MeeteiMayek,
+    OldSouthArabian,
+    OldTurkic,
+    Samaritan,
+    TaiTham,
+    TaiViet,
+    Batak,
+    Brahmi,
+    Mandaic,
+    Chakma,
+    MeroiticCursive,
+    MeroiticHieroglyphs,
+    Miao,
+    Sharada,
+    SoraSompeng,
+    Takri,
+    BassaVah,
+    CaucasianAlbanian,
+    Duployan,
+    Elbasan,
+    Grantha,
+    Khojki,
+    Khudawadi,
+    LinearA,
+    Mahajani,
+    Manichaean,
+    MendeKikakui,
+    Modi,
+    Mro,
+    Nabataean,
+    OldNorthArabian,
+    OldPermic,
+    PahawhHmong,
+    Palmyrene,
+    PauCinHau,
+    PsalterPahlavi,
+    Siddham,
+    Tirhuta,
+    WarangCiti,
+    Ahom,
+    AnatolianHieroglyphs,
+    Hatran,
+    Multani,
+    OldHungarian,
+    Signwriting,
+}</pre><h2 id='variants' class='variants small-section-header'>
+                   Variants<a href='#variants' class='anchor'></a></h2>
+<span id="variant.InvalidCode" class="variant small-section-header"><a href="#variant.InvalidCode" class="anchor field"></a><span id='InvalidCode.v' class='invisible'><code>InvalidCode</code></span></span><span id="variant.Common" class="variant small-section-header"><a href="#variant.Common" class="anchor field"></a><span id='Common.v' class='invisible'><code>Common</code></span></span><span id="variant.Inherited" class="variant small-section-header"><a href="#variant.Inherited" class="anchor field"></a><span id='Inherited.v' class='invisible'><code>Inherited</code></span></span><span id="variant.Arabic" class="variant small-section-header"><a href="#variant.Arabic" class="anchor field"></a><span id='Arabic.v' class='invisible'><code>Arabic</code></span></span><span id="variant.Armenian" class="variant small-section-header"><a href="#variant.Armenian" class="anchor field"></a><span id='Armenian.v' class='invisible'><code>Armenian</code></span></span><span id="variant.Bengali" class="variant small-section-header"><a href="#variant.Bengali" class="anchor field"></a><span id='Bengali.v' class='invisible'><code>Bengali</code></span></span><span id="variant.Bopomofo" class="variant small-section-header"><a href="#variant.Bopomofo" class="anchor field"></a><span id='Bopomofo.v' class='invisible'><code>Bopomofo</code></span></span><span id="variant.Cherokee" class="variant small-section-header"><a href="#variant.Cherokee" class="anchor field"></a><span id='Cherokee.v' class='invisible'><code>Cherokee</code></span></span><span id="variant.Coptic" class="variant small-section-header"><a href="#variant.Coptic" class="anchor field"></a><span id='Coptic.v' class='invisible'><code>Coptic</code></span></span><span id="variant.Cyrillic" class="variant small-section-header"><a href="#variant.Cyrillic" class="anchor field"></a><span id='Cyrillic.v' class='invisible'><code>Cyrillic</code></span></span><span id="variant.Deseret" class="variant small-section-header"><a href="#variant.Deseret" class="anchor field"></a><span id='Deseret.v' class='invisible'><code>Deseret</code></span></span><span id="variant.Devanagari" class="variant small-section-header"><a href="#variant.Devanagari" class="anchor field"></a><span id='Devanagari.v' class='invisible'><code>Devanagari</code></span></span><span id="variant.Ethiopic" class="variant small-section-header"><a href="#variant.Ethiopic" class="anchor field"></a><span id='Ethiopic.v' class='invisible'><code>Ethiopic</code></span></span><span id="variant.Georgian" class="variant small-section-header"><a href="#variant.Georgian" class="anchor field"></a><span id='Georgian.v' class='invisible'><code>Georgian</code></span></span><span id="variant.Gothic" class="variant small-section-header"><a href="#variant.Gothic" class="anchor field"></a><span id='Gothic.v' class='invisible'><code>Gothic</code></span></span><span id="variant.Greek" class="variant small-section-header"><a href="#variant.Greek" class="anchor field"></a><span id='Greek.v' class='invisible'><code>Greek</code></span></span><span id="variant.Gujarati" class="variant small-section-header"><a href="#variant.Gujarati" class="anchor field"></a><span id='Gujarati.v' class='invisible'><code>Gujarati</code></span></span><span id="variant.Gurmukhi" class="variant small-section-header"><a href="#variant.Gurmukhi" class="anchor field"></a><span id='Gurmukhi.v' class='invisible'><code>Gurmukhi</code></span></span><span id="variant.Han" class="variant small-section-header"><a href="#variant.Han" class="anchor field"></a><span id='Han.v' class='invisible'><code>Han</code></span></span><span id="variant.Hangul" class="variant small-section-header"><a href="#variant.Hangul" class="anchor field"></a><span id='Hangul.v' class='invisible'><code>Hangul</code></span></span><span id="variant.Hebrew" class="variant small-section-header"><a href="#variant.Hebrew" class="anchor field"></a><span id='Hebrew.v' class='invisible'><code>Hebrew</code></span></span><span id="variant.Hiragana" class="variant small-section-header"><a href="#variant.Hiragana" class="anchor field"></a><span id='Hiragana.v' class='invisible'><code>Hiragana</code></span></span><span id="variant.Kannada" class="variant small-section-header"><a href="#variant.Kannada" class="anchor field"></a><span id='Kannada.v' class='invisible'><code>Kannada</code></span></span><span id="variant.Katakana" class="variant small-section-header"><a href="#variant.Katakana" class="anchor field"></a><span id='Katakana.v' class='invisible'><code>Katakana</code></span></span><span id="variant.Khmer" class="variant small-section-header"><a href="#variant.Khmer" class="anchor field"></a><span id='Khmer.v' class='invisible'><code>Khmer</code></span></span><span id="variant.Lao" class="variant small-section-header"><a href="#variant.Lao" class="anchor field"></a><span id='Lao.v' class='invisible'><code>Lao</code></span></span><span id="variant.Latin" class="variant small-section-header"><a href="#variant.Latin" class="anchor field"></a><span id='Latin.v' class='invisible'><code>Latin</code></span></span><span id="variant.Malayalam" class="variant small-section-header"><a href="#variant.Malayalam" class="anchor field"></a><span id='Malayalam.v' class='invisible'><code>Malayalam</code></span></span><span id="variant.Mongolian" class="variant small-section-header"><a href="#variant.Mongolian" class="anchor field"></a><span id='Mongolian.v' class='invisible'><code>Mongolian</code></span></span><span id="variant.Myanmar" class="variant small-section-header"><a href="#variant.Myanmar" class="anchor field"></a><span id='Myanmar.v' class='invisible'><code>Myanmar</code></span></span><span id="variant.Ogham" class="variant small-section-header"><a href="#variant.Ogham" class="anchor field"></a><span id='Ogham.v' class='invisible'><code>Ogham</code></span></span><span id="variant.OldItalic" class="variant small-section-header"><a href="#variant.OldItalic" class="anchor field"></a><span id='OldItalic.v' class='invisible'><code>OldItalic</code></span></span><span id="variant.Oriya" class="variant small-section-header"><a href="#variant.Oriya" class="anchor field"></a><span id='Oriya.v' class='invisible'><code>Oriya</code></span></span><span id="variant.Runic" class="variant small-section-header"><a href="#variant.Runic" class="anchor field"></a><span id='Runic.v' class='invisible'><code>Runic</code></span></span><span id="variant.Sinhala" class="variant small-section-header"><a href="#variant.Sinhala" class="anchor field"></a><span id='Sinhala.v' class='invisible'><code>Sinhala</code></span></span><span id="variant.Syriac" class="variant small-section-header"><a href="#variant.Syriac" class="anchor field"></a><span id='Syriac.v' class='invisible'><code>Syriac</code></span></span><span id="variant.Tamil" class="variant small-section-header"><a href="#variant.Tamil" class="anchor field"></a><span id='Tamil.v' class='invisible'><code>Tamil</code></span></span><span id="variant.Telugu" class="variant small-section-header"><a href="#variant.Telugu" class="anchor field"></a><span id='Telugu.v' class='invisible'><code>Telugu</code></span></span><span id="variant.Thaana" class="variant small-section-header"><a href="#variant.Thaana" class="anchor field"></a><span id='Thaana.v' class='invisible'><code>Thaana</code></span></span><span id="variant.Thai" class="variant small-section-header"><a href="#variant.Thai" class="anchor field"></a><span id='Thai.v' class='invisible'><code>Thai</code></span></span><span id="variant.Tibetan" class="variant small-section-header"><a href="#variant.Tibetan" class="anchor field"></a><span id='Tibetan.v' class='invisible'><code>Tibetan</code></span></span><span id="variant.CanadianAboriginal" class="variant small-section-header"><a href="#variant.CanadianAboriginal" class="anchor field"></a><span id='CanadianAboriginal.v' class='invisible'><code>CanadianAboriginal</code></span></span><span id="variant.Yi" class="variant small-section-header"><a href="#variant.Yi" class="anchor field"></a><span id='Yi.v' class='invisible'><code>Yi</code></span></span><span id="variant.Tagalog" class="variant small-section-header"><a href="#variant.Tagalog" class="anchor field"></a><span id='Tagalog.v' class='invisible'><code>Tagalog</code></span></span><span id="variant.Hanunoo" class="variant small-section-header"><a href="#variant.Hanunoo" class="anchor field"></a><span id='Hanunoo.v' class='invisible'><code>Hanunoo</code></span></span><span id="variant.Buhid" class="variant small-section-header"><a href="#variant.Buhid" class="anchor field"></a><span id='Buhid.v' class='invisible'><code>Buhid</code></span></span><span id="variant.Tagbanwa" class="variant small-section-header"><a href="#variant.Tagbanwa" class="anchor field"></a><span id='Tagbanwa.v' class='invisible'><code>Tagbanwa</code></span></span><span id="variant.Braille" class="variant small-section-header"><a href="#variant.Braille" class="anchor field"></a><span id='Braille.v' class='invisible'><code>Braille</code></span></span><span id="variant.Cypriot" class="variant small-section-header"><a href="#variant.Cypriot" class="anchor field"></a><span id='Cypriot.v' class='invisible'><code>Cypriot</code></span></span><span id="variant.Limbu" class="variant small-section-header"><a href="#variant.Limbu" class="anchor field"></a><span id='Limbu.v' class='invisible'><code>Limbu</code></span></span><span id="variant.Osmanya" class="variant small-section-header"><a href="#variant.Osmanya" class="anchor field"></a><span id='Osmanya.v' class='invisible'><code>Osmanya</code></span></span><span id="variant.Shavian" class="variant small-section-header"><a href="#variant.Shavian" class="anchor field"></a><span id='Shavian.v' class='invisible'><code>Shavian</code></span></span><span id="variant.LinearB" class="variant small-section-header"><a href="#variant.LinearB" class="anchor field"></a><span id='LinearB.v' class='invisible'><code>LinearB</code></span></span><span id="variant.TaiLe" class="variant small-section-header"><a href="#variant.TaiLe" class="anchor field"></a><span id='TaiLe.v' class='invisible'><code>TaiLe</code></span></span><span id="variant.Ugaritic" class="variant small-section-header"><a href="#variant.Ugaritic" class="anchor field"></a><span id='Ugaritic.v' class='invisible'><code>Ugaritic</code></span></span><span id="variant.NewTaiLue" class="variant small-section-header"><a href="#variant.NewTaiLue" class="anchor field"></a><span id='NewTaiLue.v' class='invisible'><code>NewTaiLue</code></span></span><span id="variant.Buginese" class="variant small-section-header"><a href="#variant.Buginese" class="anchor field"></a><span id='Buginese.v' class='invisible'><code>Buginese</code></span></span><span id="variant.Glagolitic" class="variant small-section-header"><a href="#variant.Glagolitic" class="anchor field"></a><span id='Glagolitic.v' class='invisible'><code>Glagolitic</code></span></span><span id="variant.Tifinagh" class="variant small-section-header"><a href="#variant.Tifinagh" class="anchor field"></a><span id='Tifinagh.v' class='invisible'><code>Tifinagh</code></span></span><span id="variant.SylotiNagri" class="variant small-section-header"><a href="#variant.SylotiNagri" class="anchor field"></a><span id='SylotiNagri.v' class='invisible'><code>SylotiNagri</code></span></span><span id="variant.OldPersian" class="variant small-section-header"><a href="#variant.OldPersian" class="anchor field"></a><span id='OldPersian.v' class='invisible'><code>OldPersian</code></span></span><span id="variant.Kharoshthi" class="variant small-section-header"><a href="#variant.Kharoshthi" class="anchor field"></a><span id='Kharoshthi.v' class='invisible'><code>Kharoshthi</code></span></span><span id="variant.Unknown" class="variant small-section-header"><a href="#variant.Unknown" class="anchor field"></a><span id='Unknown.v' class='invisible'><code>Unknown</code></span></span><span id="variant.Balinese" class="variant small-section-header"><a href="#variant.Balinese" class="anchor field"></a><span id='Balinese.v' class='invisible'><code>Balinese</code></span></span><span id="variant.Cuneiform" class="variant small-section-header"><a href="#variant.Cuneiform" class="anchor field"></a><span id='Cuneiform.v' class='invisible'><code>Cuneiform</code></span></span><span id="variant.Phoenician" class="variant small-section-header"><a href="#variant.Phoenician" class="anchor field"></a><span id='Phoenician.v' class='invisible'><code>Phoenician</code></span></span><span id="variant.PhagsPa" class="variant small-section-header"><a href="#variant.PhagsPa" class="anchor field"></a><span id='PhagsPa.v' class='invisible'><code>PhagsPa</code></span></span><span id="variant.Nko" class="variant small-section-header"><a href="#variant.Nko" class="anchor field"></a><span id='Nko.v' class='invisible'><code>Nko</code></span></span><span id="variant.KayahLi" class="variant small-section-header"><a href="#variant.KayahLi" class="anchor field"></a><span id='KayahLi.v' class='invisible'><code>KayahLi</code></span></span><span id="variant.Lepcha" class="variant small-section-header"><a href="#variant.Lepcha" class="anchor field"></a><span id='Lepcha.v' class='invisible'><code>Lepcha</code></span></span><span id="variant.Rejang" class="variant small-section-header"><a href="#variant.Rejang" class="anchor field"></a><span id='Rejang.v' class='invisible'><code>Rejang</code></span></span><span id="variant.Sundanese" class="variant small-section-header"><a href="#variant.Sundanese" class="anchor field"></a><span id='Sundanese.v' class='invisible'><code>Sundanese</code></span></span><span id="variant.Saurashtra" class="variant small-section-header"><a href="#variant.Saurashtra" class="anchor field"></a><span id='Saurashtra.v' class='invisible'><code>Saurashtra</code></span></span><span id="variant.Cham" class="variant small-section-header"><a href="#variant.Cham" class="anchor field"></a><span id='Cham.v' class='invisible'><code>Cham</code></span></span><span id="variant.OlChiki" class="variant small-section-header"><a href="#variant.OlChiki" class="anchor field"></a><span id='OlChiki.v' class='invisible'><code>OlChiki</code></span></span><span id="variant.Vai" class="variant small-section-header"><a href="#variant.Vai" class="anchor field"></a><span id='Vai.v' class='invisible'><code>Vai</code></span></span><span id="variant.Carian" class="variant small-section-header"><a href="#variant.Carian" class="anchor field"></a><span id='Carian.v' class='invisible'><code>Carian</code></span></span><span id="variant.Lycian" class="variant small-section-header"><a href="#variant.Lycian" class="anchor field"></a><span id='Lycian.v' class='invisible'><code>Lycian</code></span></span><span id="variant.Lydian" class="variant small-section-header"><a href="#variant.Lydian" class="anchor field"></a><span id='Lydian.v' class='invisible'><code>Lydian</code></span></span><span id="variant.Avestan" class="variant small-section-header"><a href="#variant.Avestan" class="anchor field"></a><span id='Avestan.v' class='invisible'><code>Avestan</code></span></span><span id="variant.Bamum" class="variant small-section-header"><a href="#variant.Bamum" class="anchor field"></a><span id='Bamum.v' class='invisible'><code>Bamum</code></span></span><span id="variant.EgyptianHieroglyphs" class="variant small-section-header"><a href="#variant.EgyptianHieroglyphs" class="anchor field"></a><span id='EgyptianHieroglyphs.v' class='invisible'><code>EgyptianHieroglyphs</code></span></span><span id="variant.ImperialAramaic" class="variant small-section-header"><a href="#variant.ImperialAramaic" class="anchor field"></a><span id='ImperialAramaic.v' class='invisible'><code>ImperialAramaic</code></span></span><span id="variant.InscriptionalPahlavi" class="variant small-section-header"><a href="#variant.InscriptionalPahlavi" class="anchor field"></a><span id='InscriptionalPahlavi.v' class='invisible'><code>InscriptionalPahlavi</code></span></span><span id="variant.InscriptionalParthian" class="variant small-section-header"><a href="#variant.InscriptionalParthian" class="anchor field"></a><span id='InscriptionalParthian.v' class='invisible'><code>InscriptionalParthian</code></span></span><span id="variant.Javanese" class="variant small-section-header"><a href="#variant.Javanese" class="anchor field"></a><span id='Javanese.v' class='invisible'><code>Javanese</code></span></span><span id="variant.Kaithi" class="variant small-section-header"><a href="#variant.Kaithi" class="anchor field"></a><span id='Kaithi.v' class='invisible'><code>Kaithi</code></span></span><span id="variant.Lisu" class="variant small-section-header"><a href="#variant.Lisu" class="anchor field"></a><span id='Lisu.v' class='invisible'><code>Lisu</code></span></span><span id="variant.MeeteiMayek" class="variant small-section-header"><a href="#variant.MeeteiMayek" class="anchor field"></a><span id='MeeteiMayek.v' class='invisible'><code>MeeteiMayek</code></span></span><span id="variant.OldSouthArabian" class="variant small-section-header"><a href="#variant.OldSouthArabian" class="anchor field"></a><span id='OldSouthArabian.v' class='invisible'><code>OldSouthArabian</code></span></span><span id="variant.OldTurkic" class="variant small-section-header"><a href="#variant.OldTurkic" class="anchor field"></a><span id='OldTurkic.v' class='invisible'><code>OldTurkic</code></span></span><span id="variant.Samaritan" class="variant small-section-header"><a href="#variant.Samaritan" class="anchor field"></a><span id='Samaritan.v' class='invisible'><code>Samaritan</code></span></span><span id="variant.TaiTham" class="variant small-section-header"><a href="#variant.TaiTham" class="anchor field"></a><span id='TaiTham.v' class='invisible'><code>TaiTham</code></span></span><span id="variant.TaiViet" class="variant small-section-header"><a href="#variant.TaiViet" class="anchor field"></a><span id='TaiViet.v' class='invisible'><code>TaiViet</code></span></span><span id="variant.Batak" class="variant small-section-header"><a href="#variant.Batak" class="anchor field"></a><span id='Batak.v' class='invisible'><code>Batak</code></span></span><span id="variant.Brahmi" class="variant small-section-header"><a href="#variant.Brahmi" class="anchor field"></a><span id='Brahmi.v' class='invisible'><code>Brahmi</code></span></span><span id="variant.Mandaic" class="variant small-section-header"><a href="#variant.Mandaic" class="anchor field"></a><span id='Mandaic.v' class='invisible'><code>Mandaic</code></span></span><span id="variant.Chakma" class="variant small-section-header"><a href="#variant.Chakma" class="anchor field"></a><span id='Chakma.v' class='invisible'><code>Chakma</code></span></span><span id="variant.MeroiticCursive" class="variant small-section-header"><a href="#variant.MeroiticCursive" class="anchor field"></a><span id='MeroiticCursive.v' class='invisible'><code>MeroiticCursive</code></span></span><span id="variant.MeroiticHieroglyphs" class="variant small-section-header"><a href="#variant.MeroiticHieroglyphs" class="anchor field"></a><span id='MeroiticHieroglyphs.v' class='invisible'><code>MeroiticHieroglyphs</code></span></span><span id="variant.Miao" class="variant small-section-header"><a href="#variant.Miao" class="anchor field"></a><span id='Miao.v' class='invisible'><code>Miao</code></span></span><span id="variant.Sharada" class="variant small-section-header"><a href="#variant.Sharada" class="anchor field"></a><span id='Sharada.v' class='invisible'><code>Sharada</code></span></span><span id="variant.SoraSompeng" class="variant small-section-header"><a href="#variant.SoraSompeng" class="anchor field"></a><span id='SoraSompeng.v' class='invisible'><code>SoraSompeng</code></span></span><span id="variant.Takri" class="variant small-section-header"><a href="#variant.Takri" class="anchor field"></a><span id='Takri.v' class='invisible'><code>Takri</code></span></span><span id="variant.BassaVah" class="variant small-section-header"><a href="#variant.BassaVah" class="anchor field"></a><span id='BassaVah.v' class='invisible'><code>BassaVah</code></span></span><span id="variant.CaucasianAlbanian" class="variant small-section-header"><a href="#variant.CaucasianAlbanian" class="anchor field"></a><span id='CaucasianAlbanian.v' class='invisible'><code>CaucasianAlbanian</code></span></span><span id="variant.Duployan" class="variant small-section-header"><a href="#variant.Duployan" class="anchor field"></a><span id='Duployan.v' class='invisible'><code>Duployan</code></span></span><span id="variant.Elbasan" class="variant small-section-header"><a href="#variant.Elbasan" class="anchor field"></a><span id='Elbasan.v' class='invisible'><code>Elbasan</code></span></span><span id="variant.Grantha" class="variant small-section-header"><a href="#variant.Grantha" class="anchor field"></a><span id='Grantha.v' class='invisible'><code>Grantha</code></span></span><span id="variant.Khojki" class="variant small-section-header"><a href="#variant.Khojki" class="anchor field"></a><span id='Khojki.v' class='invisible'><code>Khojki</code></span></span><span id="variant.Khudawadi" class="variant small-section-header"><a href="#variant.Khudawadi" class="anchor field"></a><span id='Khudawadi.v' class='invisible'><code>Khudawadi</code></span></span><span id="variant.LinearA" class="variant small-section-header"><a href="#variant.LinearA" class="anchor field"></a><span id='LinearA.v' class='invisible'><code>LinearA</code></span></span><span id="variant.Mahajani" class="variant small-section-header"><a href="#variant.Mahajani" class="anchor field"></a><span id='Mahajani.v' class='invisible'><code>Mahajani</code></span></span><span id="variant.Manichaean" class="variant small-section-header"><a href="#variant.Manichaean" class="anchor field"></a><span id='Manichaean.v' class='invisible'><code>Manichaean</code></span></span><span id="variant.MendeKikakui" class="variant small-section-header"><a href="#variant.MendeKikakui" class="anchor field"></a><span id='MendeKikakui.v' class='invisible'><code>MendeKikakui</code></span></span><span id="variant.Modi" class="variant small-section-header"><a href="#variant.Modi" class="anchor field"></a><span id='Modi.v' class='invisible'><code>Modi</code></span></span><span id="variant.Mro" class="variant small-section-header"><a href="#variant.Mro" class="anchor field"></a><span id='Mro.v' class='invisible'><code>Mro</code></span></span><span id="variant.Nabataean" class="variant small-section-header"><a href="#variant.Nabataean" class="anchor field"></a><span id='Nabataean.v' class='invisible'><code>Nabataean</code></span></span><span id="variant.OldNorthArabian" class="variant small-section-header"><a href="#variant.OldNorthArabian" class="anchor field"></a><span id='OldNorthArabian.v' class='invisible'><code>OldNorthArabian</code></span></span><span id="variant.OldPermic" class="variant small-section-header"><a href="#variant.OldPermic" class="anchor field"></a><span id='OldPermic.v' class='invisible'><code>OldPermic</code></span></span><span id="variant.PahawhHmong" class="variant small-section-header"><a href="#variant.PahawhHmong" class="anchor field"></a><span id='PahawhHmong.v' class='invisible'><code>PahawhHmong</code></span></span><span id="variant.Palmyrene" class="variant small-section-header"><a href="#variant.Palmyrene" class="anchor field"></a><span id='Palmyrene.v' class='invisible'><code>Palmyrene</code></span></span><span id="variant.PauCinHau" class="variant small-section-header"><a href="#variant.PauCinHau" class="anchor field"></a><span id='PauCinHau.v' class='invisible'><code>PauCinHau</code></span></span><span id="variant.PsalterPahlavi" class="variant small-section-header"><a href="#variant.PsalterPahlavi" class="anchor field"></a><span id='PsalterPahlavi.v' class='invisible'><code>PsalterPahlavi</code></span></span><span id="variant.Siddham" class="variant small-section-header"><a href="#variant.Siddham" class="anchor field"></a><span id='Siddham.v' class='invisible'><code>Siddham</code></span></span><span id="variant.Tirhuta" class="variant small-section-header"><a href="#variant.Tirhuta" class="anchor field"></a><span id='Tirhuta.v' class='invisible'><code>Tirhuta</code></span></span><span id="variant.WarangCiti" class="variant small-section-header"><a href="#variant.WarangCiti" class="anchor field"></a><span id='WarangCiti.v' class='invisible'><code>WarangCiti</code></span></span><span id="variant.Ahom" class="variant small-section-header"><a href="#variant.Ahom" class="anchor field"></a><span id='Ahom.v' class='invisible'><code>Ahom</code></span></span><span id="variant.AnatolianHieroglyphs" class="variant small-section-header"><a href="#variant.AnatolianHieroglyphs" class="anchor field"></a><span id='AnatolianHieroglyphs.v' class='invisible'><code>AnatolianHieroglyphs</code></span></span><span id="variant.Hatran" class="variant small-section-header"><a href="#variant.Hatran" class="anchor field"></a><span id='Hatran.v' class='invisible'><code>Hatran</code></span></span><span id="variant.Multani" class="variant small-section-header"><a href="#variant.Multani" class="anchor field"></a><span id='Multani.v' class='invisible'><code>Multani</code></span></span><span id="variant.OldHungarian" class="variant small-section-header"><a href="#variant.OldHungarian" class="anchor field"></a><span id='OldHungarian.v' class='invisible'><code>OldHungarian</code></span></span><span id="variant.Signwriting" class="variant small-section-header"><a href="#variant.Signwriting" class="anchor field"></a><span id='Signwriting.v' class='invisible'><code>Signwriting</code></span></span>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Clone' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../glib_sys/enum.GUnicodeScript.html" title="enum glib_sys::GUnicodeScript">GUnicodeScript</a></code><a href='#impl-Clone' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib_sys/lib.rs.html#791' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="enum" href="../glib_sys/enum.GUnicodeScript.html" title="enum glib_sys::GUnicodeScript">GUnicodeScript</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib_sys/lib.rs.html#791' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Self)</code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/clone.rs.html#112-114' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 id='impl-Copy' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="enum" href="../glib_sys/enum.GUnicodeScript.html" title="enum glib_sys::GUnicodeScript">GUnicodeScript</a></code><a href='#impl-Copy' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib_sys/lib.rs.html#791' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../glib_sys/enum.GUnicodeScript.html" title="enum glib_sys::GUnicodeScript">GUnicodeScript</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib_sys/lib.rs.html#791' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib_sys/lib.rs.html#791' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
+</div></div><h3 id='impl-Eq' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="enum" href="../glib_sys/enum.GUnicodeScript.html" title="enum glib_sys::GUnicodeScript">GUnicodeScript</a></code><a href='#impl-Eq' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib_sys/lib.rs.html#791' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 id='impl-PartialEq' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> for <a class="enum" href="../glib_sys/enum.GUnicodeScript.html" title="enum glib_sys::GUnicodeScript">GUnicodeScript</a></code><a href='#impl-PartialEq' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib_sys/lib.rs.html#791' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class="method"><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../glib_sys/enum.GUnicodeScript.html" title="enum glib_sys::GUnicodeScript">GUnicodeScript</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib_sys/lib.rs.html#791' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class="method"><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Rhs) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/cmp.rs.html#121' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>↑</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>↓</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt style="width:31px;">+ / -</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "glib_sys";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

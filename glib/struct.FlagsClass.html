@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `FlagsClass` struct in crate `glib`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, FlagsClass">
+
+    <title>glib::FlagsClass - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct FlagsClass</p><div class="block items"><a class="sidebar-title" href="#methods">Methods</a><div class="sidebar-links"><a href="#method.new">new</a><a href="#method.type_">type_</a><a href="#method.get_value">get_value</a><a href="#method.get_value_by_name">get_value_by_name</a><a href="#method.get_value_by_nick">get_value_by_nick</a><a href="#method.get_values">get_values</a><a href="#method.to_value">to_value</a><a href="#method.to_value_by_name">to_value_by_name</a><a href="#method.to_value_by_nick">to_value_by_nick</a><a href="#method.is_set">is_set</a><a href="#method.is_set_by_name">is_set_by_name</a><a href="#method.is_set_by_nick">is_set_by_nick</a><a href="#method.set">set</a><a href="#method.set_by_name">set_by_name</a><a href="#method.set_by_nick">set_by_nick</a><a href="#method.unset">unset</a><a href="#method.unset_by_name">unset_by_name</a><a href="#method.unset_by_nick">unset_by_nick</a><a href="#method.builder">builder</a><a href="#method.builder_with_value">builder_with_value</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Debug">Debug</a><a href="#impl-Drop">Drop</a><a href="#impl-Clone">Clone</a></div></div><p class='location'><a href='index.html'>glib</a></p><script>window.sidebarCurrent = {name: 'FlagsClass', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>glib</a>::<wbr><a class="struct" href=''>FlagsClass</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/glib/enums.rs.html#235' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct FlagsClass(_);</pre><div class='docblock'><p>Representation of a <code>flags</code> for dynamically, at runtime, querying the values of the enum and
+using them</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../glib/struct.FlagsClass.html" title="struct glib::FlagsClass">FlagsClass</a></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#237-516' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>pub fn <a href='#method.new' class='fnname'>new</a>(type_: <a class="enum" href="../glib/types/enum.Type.html" title="enum glib::types::Type">Type</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#241-250' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Create a new <code>FlagsClass</code> from a <code>Type</code></p>
+
+<p>Returns <code>None</code> if <code>type_</code> is not representing a flags type.</p>
+</div><h4 id='method.type_' class="method"><span id='type_.v' class='invisible'><code>pub fn <a href='#method.type_' class='fnname'>type_</a>(&amp;self) -&gt; <a class="enum" href="../glib/types/enum.Type.html" title="enum glib::types::Type">Type</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#253-257' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p><code>Type</code> of the flags.</p>
+</div><h4 id='method.get_value' class="method"><span id='get_value.v' class='invisible'><code>pub fn <a href='#method.get_value' class='fnname'>get_value</a>(&amp;self, value: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../glib/struct.FlagsValue.html" title="struct glib::FlagsValue">FlagsValue</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#263-272' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Gets <code>FlagsValue</code> by integer <code>value</code>, if existing.</p>
+
+<p>Returns <code>None</code> if the flags do not contain any value
+with <code>value</code>.</p>
+</div><h4 id='method.get_value_by_name' class="method"><span id='get_value_by_name.v' class='invisible'><code>pub fn <a href='#method.get_value_by_name' class='fnname'>get_value_by_name</a>(&amp;self, name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../glib/struct.FlagsValue.html" title="struct glib::FlagsValue">FlagsValue</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#278-287' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Gets <code>FlagsValue</code> by string name <code>name</code>, if existing.</p>
+
+<p>Returns <code>None</code> if the flags do not contain any value
+with name <code>name</code>.</p>
+</div><h4 id='method.get_value_by_nick' class="method"><span id='get_value_by_nick.v' class='invisible'><code>pub fn <a href='#method.get_value_by_nick' class='fnname'>get_value_by_nick</a>(&amp;self, nick: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../glib/struct.FlagsValue.html" title="struct glib::FlagsValue">FlagsValue</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#293-302' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Gets <code>FlagsValue</code> by string nick <code>nick</code>, if existing.</p>
+
+<p>Returns <code>None</code> if the flags do not contain any value
+with nick <code>nick</code>.</p>
+</div><h4 id='method.get_values' class="method"><span id='get_values.v' class='invisible'><code>pub fn <a href='#method.get_values' class='fnname'>get_values</a>(&amp;self) -&gt; <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/vec/struct.Vec.html" title="struct alloc::vec::Vec">Vec</a>&lt;<a class="struct" href="../glib/struct.FlagsValue.html" title="struct glib::FlagsValue">FlagsValue</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#305-314' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Gets all <code>FlagsValue</code> of this <code>FlagsClass</code>.</p>
+</div><h4 id='method.to_value' class="method"><span id='to_value.v' class='invisible'><code>pub fn <a href='#method.to_value' class='fnname'>to_value</a>(&amp;self, value: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#317-319' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Converts integer <code>value</code> to a <code>Value</code>, if part of the flags.</p>
+</div><h4 id='method.to_value_by_name' class="method"><span id='to_value_by_name.v' class='invisible'><code>pub fn <a href='#method.to_value_by_name' class='fnname'>to_value_by_name</a>(&amp;self, name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#322-324' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Converts string name <code>name</code> to a <code>Value</code>, if part of the flags.</p>
+</div><h4 id='method.to_value_by_nick' class="method"><span id='to_value_by_nick.v' class='invisible'><code>pub fn <a href='#method.to_value_by_nick' class='fnname'>to_value_by_nick</a>(&amp;self, nick: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#327-329' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Converts string nick <code>nick</code> to a <code>Value</code>, if part of the flags.</p>
+</div><h4 id='method.is_set' class="method"><span id='is_set.v' class='invisible'><code>pub fn <a href='#method.is_set' class='fnname'>is_set</a>(&amp;self, value: &amp;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, f: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#332-341' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Checks if the flags corresponding to integer <code>f</code> is set in <code>value</code>.</p>
+</div><h4 id='method.is_set_by_name' class="method"><span id='is_set_by_name.v' class='invisible'><code>pub fn <a href='#method.is_set_by_name' class='fnname'>is_set_by_name</a>(&amp;self, value: &amp;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#344-357' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Checks if the flags corresponding to string name <code>name</code> is set in <code>value</code>.</p>
+</div><h4 id='method.is_set_by_nick' class="method"><span id='is_set_by_nick.v' class='invisible'><code>pub fn <a href='#method.is_set_by_nick' class='fnname'>is_set_by_nick</a>(&amp;self, value: &amp;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, nick: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#360-373' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Checks if the flags corresponding to string nick <code>nick</code> is set in <code>value</code>.</p>
+</div><h4 id='method.set' class="method"><span id='set.v' class='invisible'><code>pub fn <a href='#method.set' class='fnname'>set</a>(&amp;self, value: <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, f: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#380-394' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Sets flags value corresponding to integer <code>f</code> in <code>value</code>, if part of that flags. If the
+flag is already set, it will succeed without doing any changes.</p>
+
+<p>Returns <code>Ok(value)</code> with the flag set if successful, or <code>Err(value)</code> with the original
+value otherwise.</p>
+</div><h4 id='method.set_by_name' class="method"><span id='set_by_name.v' class='invisible'><code>pub fn <a href='#method.set_by_name' class='fnname'>set_by_name</a>(&amp;self, value: <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#401-415' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Sets flags value corresponding to string name <code>name</code> in <code>value</code>, if part of that flags.
+If the flag is already set, it will succeed without doing any changes.</p>
+
+<p>Returns <code>Ok(value)</code> with the flag set if successful, or <code>Err(value)</code> with the original
+value otherwise.</p>
+</div><h4 id='method.set_by_nick' class="method"><span id='set_by_nick.v' class='invisible'><code>pub fn <a href='#method.set_by_nick' class='fnname'>set_by_nick</a>(&amp;self, value: <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, nick: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#422-436' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Sets flags value corresponding to string nick <code>nick</code> in <code>value</code>, if part of that flags.
+If the flag is already set, it will succeed without doing any changes.</p>
+
+<p>Returns <code>Ok(value)</code> with the flag set if successful, or <code>Err(value)</code> with the original
+value otherwise.</p>
+</div><h4 id='method.unset' class="method"><span id='unset.v' class='invisible'><code>pub fn <a href='#method.unset' class='fnname'>unset</a>(&amp;self, value: <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, f: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#443-457' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Unsets flags value corresponding to integer <code>f</code> in <code>value</code>, if part of that flags.
+If the flag is already unset, it will succeed without doing any changes.</p>
+
+<p>Returns <code>Ok(value)</code> with the flag unset if successful, or <code>Err(value)</code> with the original
+value otherwise.</p>
+</div><h4 id='method.unset_by_name' class="method"><span id='unset_by_name.v' class='invisible'><code>pub fn <a href='#method.unset_by_name' class='fnname'>unset_by_name</a>(&amp;self, value: <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#464-478' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Unsets flags value corresponding to string name <code>name</code> in <code>value</code>, if part of that flags.
+If the flag is already unset, it will succeed without doing any changes.</p>
+
+<p>Returns <code>Ok(value)</code> with the flag unset if successful, or <code>Err(value)</code> with the original
+value otherwise.</p>
+</div><h4 id='method.unset_by_nick' class="method"><span id='unset_by_nick.v' class='invisible'><code>pub fn <a href='#method.unset_by_nick' class='fnname'>unset_by_nick</a>(&amp;self, value: <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, nick: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>, <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#485-499' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Unsets flags value corresponding to string nick <code>nick</code> in <code>value</code>, if part of that flags.
+If the flag is already unset, it will succeed without doing any changes.</p>
+
+<p>Returns <code>Ok(value)</code> with the flag unset if successful, or <code>Err(value)</code> with the original
+value otherwise.</p>
+</div><h4 id='method.builder' class="method"><span id='builder.v' class='invisible'><code>pub fn <a href='#method.builder' class='fnname'>builder</a>(&amp;self) -&gt; <a class="struct" href="../glib/struct.FlagsBuilder.html" title="struct glib::FlagsBuilder">FlagsBuilder</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#503-505' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns a new <code>FlagsBuilder</code> for conveniently setting/unsetting flags
+and building a <code>Value</code>.</p>
+</div><h4 id='method.builder_with_value' class="method"><span id='builder_with_value.v' class='invisible'><code>pub fn <a href='#method.builder_with_value' class='fnname'>builder_with_value</a>(&amp;self, value: <a class="struct" href="../glib/value/struct.Value.html" title="struct glib::value::Value">Value</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../glib/struct.FlagsBuilder.html" title="struct glib::FlagsBuilder">FlagsBuilder</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#509-515' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns a new <code>FlagsBuilder</code> for conveniently setting/unsetting flags
+and building a <code>Value</code>. The <code>Value</code> is initialized with <code>value</code>.</p>
+</div></div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../glib/struct.FlagsClass.html" title="struct glib::FlagsClass">FlagsClass</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#234' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#234' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
+</div></div><h3 id='impl-Drop' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html" title="trait core::ops::drop::Drop">Drop</a> for <a class="struct" href="../glib/struct.FlagsClass.html" title="struct glib::FlagsClass">FlagsClass</a></code><a href='#impl-Drop' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#518-524' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#519-523' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Executes the destructor for this type. <a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 id='impl-Clone' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../glib/struct.FlagsClass.html" title="struct glib::FlagsClass">FlagsClass</a></code><a href='#impl-Clone' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#526-532' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/glib/enums.rs.html#527-531' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Self)</code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/clone.rs.html#112-114' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>↑</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>↓</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt style="width:31px;">+ / -</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "glib";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

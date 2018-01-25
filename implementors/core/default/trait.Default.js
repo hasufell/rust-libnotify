@@ -1,0 +1,10 @@
+(function() {var implementors = {};
+implementors["glib"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"glib/struct.KeyFile.html\" title=\"struct glib::KeyFile\">KeyFile</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"glib/struct.MainContext.html\" title=\"struct glib::MainContext\">MainContext</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"glib/signal/struct.Inhibit.html\" title=\"struct glib::signal::Inhibit\">Inhibit</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"glib/source/struct.SourceId.html\" title=\"struct glib::source::SourceId\">SourceId</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"glib/source/struct.CallbackGuard.html\" title=\"struct glib::source::CallbackGuard\">CallbackGuard</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"glib/source/struct.Priority.html\" title=\"struct glib::source::Priority\">Priority</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"glib/struct.Date.html\" title=\"struct glib::Date\">Date</a>",];
+
+            if (window.register_implementors) {
+                window.register_implementors(implementors);
+            } else {
+                window.pending_implementors = implementors;
+            }
+        
+})()
